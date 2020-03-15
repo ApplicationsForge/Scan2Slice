@@ -3,6 +3,8 @@
 
 #include "math.h"
 
+#include <QString>
+
 class Point3D
 {
 public:
@@ -18,6 +20,8 @@ public:
 
     double z() const;
     void setZ(double z);
+
+    QString toGCode();
 
     static bool cmpX(Point3D p1, Point3D p2);
 

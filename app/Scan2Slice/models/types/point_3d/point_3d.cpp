@@ -44,6 +44,11 @@ void Point3D::setZ(double z)
     m_z = z;
 }
 
+QString Point3D::toGCode()
+{
+    return "G0 X" + QString::number(m_x) + " Y" + QString::number(m_y) + " Z" + QString::number(m_z);
+}
+
 bool Point3D::cmpX(Point3D p1, Point3D p2)
 {
     return (p1.x() < p2.x());
