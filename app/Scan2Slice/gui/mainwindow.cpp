@@ -26,7 +26,10 @@ void MainWindow::on_openToolButton_clicked()
 {
     try
     {
-        QList<Point3D> points = ReadPointsFromFileInteractor::execute();
+        Router &router = Router::getInstance();
+        router.getRepository().setPoints(ReadPointsFromFileInteractor::execute());
+        QList<Point3D> points = router.getRepository().points();
+
         ui->pointsTableWidget->clear();
 
         ui->pointsTableWidget->setRowCount(points.length());
@@ -51,4 +54,25 @@ void MainWindow::on_openToolButton_clicked()
         ui->pointsTableWidget->clear();
         QMessageBox(QMessageBox::Critical, "Error", "Error").exec();
     }
+}
+
+void MainWindow::on_viewToolButton_clicked()
+{
+    try
+    {
+        Router &router = Router::getInstance();
+        QList<Point3D> points = router.getRepository().points();
+        QStringList gcodes = {};
+        for(auto point : points)
+        {
+            gcodes.append(point.toGCode());
+        }
+
+        GCodesViewInteractor::execute(gcodes, this);
+    }
+    catch (...)
+    {
+        QMessageBox(QMessageBox::Critical, "Error", "Error").exec();
+    }
+
 }

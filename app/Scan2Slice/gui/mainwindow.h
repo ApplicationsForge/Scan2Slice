@@ -6,6 +6,7 @@
 
 #include "models/router.h"
 #include "models/services/read_points_from_file/read_points_from_file_interactor.h"
+#include "models/services/gcodes_view/gcodes_view_interactor.h"
 
 namespace Ui {
 class MainWindow;
@@ -21,6 +22,8 @@ public:
 
 private slots:
     void on_openToolButton_clicked();
+
+    void on_viewToolButton_clicked();
 
 private:
     Ui::MainWindow *ui;
