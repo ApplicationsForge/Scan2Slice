@@ -22,32 +22,38 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::updatePoints()
+{
+    Router &router = Router::getInstance();
+    QList<Point3D> points = router.getRepository().points();
+
+    ui->pointsTableWidget->clear();
+
+    ui->pointsTableWidget->setRowCount(points.length());
+    ui->pointsTableWidget->setColumnCount(3);
+
+    ui->pointsTableWidget->setHorizontalHeaderLabels({"X","Y","Z"});
+
+    for(int i = 0; i < points.length(); i++)
+    {
+        ui->pointsTableWidget->setItem(i, 0, new QTableWidgetItem(QString::number(points[i].x())));
+        ui->pointsTableWidget->setItem(i, 1, new QTableWidgetItem(QString::number(points[i].y())));
+        ui->pointsTableWidget->setItem(i, 2, new QTableWidgetItem(QString::number(points[i].z())));
+    }
+
+    for (int i = 0; i < ui->pointsTableWidget->columnCount(); i++)
+    {
+        ui->pointsTableWidget->horizontalHeader()->setSectionResizeMode(i, QHeaderView::Stretch);
+    }
+}
+
 void MainWindow::on_openToolButton_clicked()
 {
     try
     {
         Router &router = Router::getInstance();
         router.getRepository().setPoints(ReadPointsFromFileInteractor::execute());
-        QList<Point3D> points = router.getRepository().points();
-
-        ui->pointsTableWidget->clear();
-
-        ui->pointsTableWidget->setRowCount(points.length());
-        ui->pointsTableWidget->setColumnCount(3);
-
-        ui->pointsTableWidget->setHorizontalHeaderLabels({"X","Y","Z"});
-
-        for(int i = 0; i < points.length(); i++)
-        {
-            ui->pointsTableWidget->setItem(i, 0, new QTableWidgetItem(QString::number(points[i].x())));
-            ui->pointsTableWidget->setItem(i, 1, new QTableWidgetItem(QString::number(points[i].y())));
-            ui->pointsTableWidget->setItem(i, 2, new QTableWidgetItem(QString::number(points[i].z())));
-        }
-
-        for (int i = 0; i < ui->pointsTableWidget->columnCount(); i++)
-        {
-            ui->pointsTableWidget->horizontalHeader()->setSectionResizeMode(i, QHeaderView::Stretch);
-        }
+        this->updatePoints();
     }
     catch (...)
     {
@@ -74,5 +80,18 @@ void MainWindow::on_viewToolButton_clicked()
     {
         QMessageBox(QMessageBox::Critical, "Error", "Error").exec();
     }
+}
 
+void MainWindow::on_modifyToolButton_clicked()
+{
+    try
+    {
+        Router &router = Router::getInstance();
+        router.getRepository().setPoints(ScanToSliceInteractor::execute(router.getRepository().points()));
+        this->updatePoints();
+    }
+    catch (...)
+    {
+        QMessageBox(QMessageBox::Critical, "Error", "Error").exec();
+    }
 }

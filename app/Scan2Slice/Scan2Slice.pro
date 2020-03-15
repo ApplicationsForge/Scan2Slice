@@ -31,6 +31,7 @@ SOURCES += \
     models/router.cpp \
     models/services/gcodes_view/gcodes_view_interactor.cpp \
     models/services/read_points_from_file/read_points_from_file_interactor.cpp \
+    models/services/scan_to_slice/scan_to_slice_interactor.cpp \
     models/settings_manager/settings_manager.cpp \
     models/types/point_3d/point_3d.cpp
 
@@ -40,6 +41,7 @@ HEADERS += \
     models/router.h \
     models/services/gcodes_view/gcodes_view_interactor.h \
     models/services/read_points_from_file/read_points_from_file_interactor.h \
+    models/services/scan_to_slice/scan_to_slice_interactor.h \
     models/settings_manager/settings_manager.h \
     models/types/point_3d/point_3d.h
 
