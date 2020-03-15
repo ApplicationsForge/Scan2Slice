@@ -3,6 +3,8 @@
 
 #include <QObject>
 
+#include "models/settings_manager/settings_manager.h"
+
 class Router;
 
 class Repository : public QObject
@@ -16,6 +18,7 @@ public:
 
 private:
     QString m_helloString = "Hello World!";
+    QString m_gCodesViewer;
 
     friend class Router;
 
