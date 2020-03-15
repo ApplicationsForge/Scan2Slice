@@ -87,7 +87,10 @@ void MainWindow::on_modifyToolButton_clicked()
     try
     {
         Router &router = Router::getInstance();
-        router.getRepository().setPoints(ScanToSliceInteractor::execute(router.getRepository().points(), ui->distanceLineEdit->text().toDouble()));
+        router.getRepository().setPoints(ScanToSliceInteractor::execute(
+                                             router.getRepository().points(),
+                                             ui->distanceLineEdit->text().toDouble(),
+                                             ui->invertCheckBox->isChecked()));
         this->updatePoints();
     }
     catch (...)

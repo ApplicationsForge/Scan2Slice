@@ -53,18 +53,9 @@
          <property name="text">
           <string>Open</string>
          </property>
-         <property name="iconSize">
-          <size>
-           <width>24</width>
-           <height>24</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QToolButton" name="modifyToolButton">
-         <property name="text">
-          <string>Modify</string>
+         <property name="icon">
+          <iconset resource="resources/resources.qrc">
+           <normaloff>:/images/images/open.png</normaloff>:/images/images/open.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -79,6 +70,27 @@
          <property name="text">
           <string>View</string>
          </property>
+         <property name="icon">
+          <iconset resource="resources/resources.qrc">
+           <normaloff>:/images/images/view.png</normaloff>:/images/images/view.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="modifyToolButton">
+         <property name="text">
+          <string>Modify</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resources/resources.qrc">
+           <normaloff>:/images/images/play.png</normaloff>:/images/images/play.png</iconset>
+         </property>
          <property name="iconSize">
           <size>
            <width>24</width>
@@ -91,6 +103,10 @@
         <widget class="QToolButton" name="saveToolButton">
          <property name="text">
           <string>Save</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resources/resources.qrc">
+           <normaloff>:/images/images/save.png</normaloff>:/images/images/save.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -107,7 +123,7 @@
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>568</width>
+           <width>603</width>
            <height>20</height>
           </size>
          </property>
@@ -118,50 +134,82 @@
     </item>
     <item>
      <widget class="QWidget" name="pointsWidget" native="true">
-      <layout class="QGridLayout" name="gridLayout">
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item row="0" column="1">
-        <widget class="QLabel" name="distanceLabel">
-         <property name="text">
-          <string>Расстояние до нуля по Z</string>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QTableWidget" name="pointsTableWidget">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>5</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
         </widget>
        </item>
-       <item row="0" column="0">
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+       <item>
+        <widget class="QWidget" name="scanToSliceParamsWidget" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>1</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>100</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="0" colspan="4">
-        <widget class="QTableWidget" name="pointsTableWidget"/>
-       </item>
-       <item row="0" column="2" colspan="2">
-        <widget class="QLineEdit" name="distanceLineEdit">
-         <property name="text">
-          <string>80.3</string>
-         </property>
-         <property name="frame">
-          <bool>true</bool>
-         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="distanceLabel">
+            <property name="text">
+             <string>Расстояние от сканера до оси вращения:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="distanceLineEdit">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>80.3</string>
+            </property>
+            <property name="frame">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="2">
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>100</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="invertCheckBox">
+            <property name="text">
+             <string>Инвертировать направление</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>
@@ -190,6 +238,8 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resources/resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
