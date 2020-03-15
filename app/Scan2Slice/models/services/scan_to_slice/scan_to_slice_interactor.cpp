@@ -5,13 +5,11 @@ ScanToSliceInteractor::ScanToSliceInteractor()
 
 }
 
-QList<Point3D> ScanToSliceInteractor::execute(QList<Point3D> points)
+QList<Point3D> ScanToSliceInteractor::execute(QList<Point3D> points, double distanceToZero)
 {
-    double d = 80.3;
-
     for(auto& point : points)
     {
-        point.setZ(point.z() + d);
+        point.setZ(point.z() + distanceToZero);
         point.setY(0.0);
     }
 

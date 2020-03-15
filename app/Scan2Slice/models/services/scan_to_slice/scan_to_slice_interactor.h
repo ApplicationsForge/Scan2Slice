@@ -11,7 +11,7 @@ class ScanToSliceInteractor
 public:
     ScanToSliceInteractor();
 
-    static QList<Point3D> execute(QList<Point3D> points);
+    static QList<Point3D> execute(QList<Point3D> points, double distanceToZero);
 };
 
 #endif // SCANTOSLICEINTERACTOR_H

@@ -87,7 +87,7 @@ void MainWindow::on_modifyToolButton_clicked()
     try
     {
         Router &router = Router::getInstance();
-        router.getRepository().setPoints(ScanToSliceInteractor::execute(router.getRepository().points()));
+        router.getRepository().setPoints(ScanToSliceInteractor::execute(router.getRepository().points(), ui->distanceLineEdit->text().toDouble()));
         this->updatePoints();
     }
     catch (...)
