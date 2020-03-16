@@ -8,32 +8,39 @@ ScanToSliceInteractor::ScanToSliceInteractor()
 QList<Point3D> ScanToSliceInteractor::execute(QList<Point3D> points, double distanceToZero, bool inverted)
 {
     points = ScanToSliceInteractor::moveToZero(points, distanceToZero);
-    return points;
+
     for(int i = 0; i < points.length(); i++)
     {
         // перевод градусов в радианы
-        //double angle = i * M_PI / 180;
-        double angle = points[i].y() * 0.0175;
+        double angle = i * M_PI / 180;
+        //double angle = i * 0.0175;
 
         double cosAngle = cos(angle);
         double sinAngle = sin(angle);
 
-        double y = 0.0;//points[i].y();
+        double y = points[i].y();
         double z = points[i].z();
+
+        double y_ = 0.0;
+        double z_ = 0.0;
 
         if(inverted)
         {
-            y = y * cosAngle + z * sinAngle;
-            z = -1 * (y * sinAngle) + z * cosAngle;
+            y_ = y * cosAngle + z * sinAngle;
+            z_ = -1 * (y * sinAngle) + z * cosAngle;
         }
         else
         {
-            y = y * cosAngle - z * sinAngle;
-            z = y * sinAngle + z * cosAngle;
+            y_ = y * cosAngle - z * sinAngle;
+            z_ = y * sinAngle + z * cosAngle;
         }
 
-        points[i].setY(y);
-        points[i].setZ(z);
+        qDebug() << i << angle << sinAngle << cosAngle << points[i].y() << points[i].z() << y_ << z_;
+
+        points[i].setY(y_);
+        points[i].setZ(z_);
+
+        qDebug() << points[i].x() << points[i].y() << points[i].z();
     }
 
     return points;
@@ -42,23 +49,18 @@ QList<Point3D> ScanToSliceInteractor::execute(QList<Point3D> points, double dist
 QList<Point3D> ScanToSliceInteractor::moveToZero(QList<Point3D> points, double distanceToZero)
 {
     int pointsCount = points.length();
-    double yCoord = 0.0;
     for(int i = 0; i < std::min(90, pointsCount); i++)
     {
-        // x = distanceToZero - fabs(points[i].z())
-
-        points[i].setZ(distanceToZero - fabs(points[i].z()));
-        points[i].setY(yCoord);
-        yCoord++;
+        points[i].setZ(points[i].z() + distanceToZero);
+        points[i].setY(0.0);
     }
 
     if(pointsCount > 90)
     {
-        for(int i = 90; i < std::min(270, pointsCount); i++)
+        for(int i = 90; i < std::min(271, pointsCount); i++)
         {
             points[i].setZ(-1*(points[i].z() + distanceToZero));
-            points[i].setY(yCoord);
-            yCoord--;
+            points[i].setY(0.0);
         }
     }
 
@@ -67,8 +69,7 @@ QList<Point3D> ScanToSliceInteractor::moveToZero(QList<Point3D> points, double d
         for(int i = 270; i < std::min(360, pointsCount); i++)
         {
             points[i].setZ(points[i].z() + distanceToZero);
-            points[i].setY(yCoord);
-            yCoord++;
+            points[i].setY(0.0);
         }
     }
     return points;
