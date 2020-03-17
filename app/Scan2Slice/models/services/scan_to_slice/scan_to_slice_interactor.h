@@ -15,6 +15,7 @@ public:
 
 private:
     static QList<Point3D> moveToZero(QList<Point3D> points, double distanceToZero);
+    static void rotate(Point3D &point, int i, bool inverted = false);
 };
 
 #endif // SCANTOSLICEINTERACTOR_H
