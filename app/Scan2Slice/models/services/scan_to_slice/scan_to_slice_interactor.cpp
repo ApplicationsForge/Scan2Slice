@@ -31,6 +31,7 @@ QList<Point3D> ScanToSliceInteractor::moveToZero(QList<Point3D> points, double d
     {
         points[i].setZ(points[i].z() + distanceToZero);
         points[i].setY(0.0);
+        points[i].setX(0.0);
     }
 
     if(pointsCount > 90)
