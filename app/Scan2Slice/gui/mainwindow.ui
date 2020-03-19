@@ -164,7 +164,7 @@
           <item row="5" column="0" colspan="2">
            <widget class="QPushButton" name="buildSlicePushButton">
             <property name="text">
-             <string>Построить</string>
+             <string>Преобразовать</string>
             </property>
             <property name="icon">
              <iconset resource="resources/resources.qrc">
