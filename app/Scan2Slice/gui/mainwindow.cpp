@@ -11,7 +11,6 @@ MainWindow::MainWindow(QWidget *parent) :
     // установка оформления statusBar
     ui->statusBar->setStyleSheet("background-color: #333; color: #33bb33");
     ui->statusBar->setFont(QFont("Consolas", 14));
-    ui->statusBar->showMessage(tr("State: ready 0123456789"));
 
     ui->pointsTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->pointsTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
