@@ -24,7 +24,7 @@ void SavePointsToFileInteractor::execute(const QList<Point3D> points, QString fi
 
     for(auto point : points)
     {
-        data += QString::number(point.x()) + " " + QString::number(point.y()) + " " + QString::number(point.z()) + "\n";
+        data += QString::number(point.x(), 'f', 7) + " " + QString::number(point.y(), 'f', 7) + " " + QString::number(point.z(), 'f', 7) + "\n";
     }
 
     file.write(data.toUtf8());
