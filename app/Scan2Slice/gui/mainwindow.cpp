@@ -109,3 +109,9 @@ void MainWindow::setBuildSliceWidgetsEnabled(bool enabled)
     ui->rotationAngleLineEdit->setEnabled(enabled);
     ui->buildSlicePushButton->setEnabled(enabled);
 }
+
+void MainWindow::on_saveToolButton_clicked()
+{
+    Router& router = Router::getInstance();
+    SavePointsToFileInteractor::execute(router.getRepository().points(), "");
+}

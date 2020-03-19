@@ -8,6 +8,7 @@
 #include "models/services/read_points_from_file/read_points_from_file_interactor.h"
 #include "models/services/gcodes_view/gcodes_view_interactor.h"
 #include "models/services/scan_to_slice/scan_to_slice_interactor.h"
+#include "models/services/save_points_to_file/save_points_to_file_interactor.h"
 
 namespace Ui {
 class MainWindow;
@@ -28,6 +29,8 @@ private slots:
     void on_viewToolButton_clicked();
 
     void on_buildSlicePushButton_clicked();
+
+    void on_saveToolButton_clicked();
 
 private:
     Ui::MainWindow *ui;
