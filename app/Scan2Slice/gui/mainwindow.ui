@@ -66,13 +66,13 @@
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="modifyToolButton">
+        <widget class="QToolButton" name="saveToolButton">
          <property name="text">
-          <string>Modify</string>
+          <string>Save</string>
          </property>
          <property name="icon">
           <iconset resource="resources/resources.qrc">
-           <normaloff>:/images/images/play.png</normaloff>:/images/images/play.png</iconset>
+           <normaloff>:/images/images/save.png</normaloff>:/images/images/save.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -83,13 +83,13 @@
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="saveToolButton">
+        <widget class="QToolButton" name="viewToolButton">
          <property name="text">
-          <string>Save</string>
+          <string>View</string>
          </property>
          <property name="icon">
           <iconset resource="resources/resources.qrc">
-           <normaloff>:/images/images/save.png</normaloff>:/images/images/save.png</iconset>
+           <normaloff>:/images/images/view.png</normaloff>:/images/images/view.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -112,29 +112,12 @@
          </property>
         </spacer>
        </item>
-       <item>
-        <widget class="QToolButton" name="viewToolButton">
-         <property name="text">
-          <string>View</string>
-         </property>
-         <property name="icon">
-          <iconset resource="resources/resources.qrc">
-           <normaloff>:/images/images/view.png</normaloff>:/images/images/view.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>24</width>
-           <height>24</height>
-          </size>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
     </item>
     <item>
      <widget class="QWidget" name="pointsWidget" native="true">
-      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <layout class="QGridLayout" name="gridLayout_2">
        <property name="leftMargin">
         <number>0</number>
        </property>
@@ -147,7 +130,17 @@
        <property name="bottomMargin">
         <number>0</number>
        </property>
-       <item>
+       <item row="0" column="0">
+        <widget class="QTableWidget" name="pointsTableWidget">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>5</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
         <widget class="QWidget" name="scanToSliceParamsWidget" native="true">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -168,6 +161,79 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
+          <item row="5" column="0" colspan="2">
+           <widget class="QPushButton" name="buildSlicePushButton">
+            <property name="text">
+             <string>Построить</string>
+            </property>
+            <property name="icon">
+             <iconset resource="resources/resources.qrc">
+              <normaloff>:/images/images/play.png</normaloff>:/images/images/play.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="distanceLabel">
+            <property name="toolTip">
+             <string>Расстояние от сканера до оси вращения, мм</string>
+            </property>
+            <property name="text">
+             <string>Расстояние:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="stepLabel">
+            <property name="toolTip">
+             <string>Дискретность снятия точек, градусы</string>
+            </property>
+            <property name="text">
+             <string>Дискретность:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="roationAngleLabel">
+            <property name="text">
+             <string>Поворот:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="stepLineEdit">
+            <property name="text">
+             <string>1</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="rotationAngleLineEdit">
+            <property name="text">
+             <string>0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="1">
            <widget class="QLineEdit" name="distanceLineEdit">
             <property name="minimumSize">
@@ -177,21 +243,17 @@
              </size>
             </property>
             <property name="text">
-             <string>80.3</string>
+             <string>100</string>
             </property>
             <property name="frame">
              <bool>true</bool>
             </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="distanceLabel">
-            <property name="text">
-             <string>Расстояние от сканера до оси вращения:</string>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
-          <item row="0" column="2" rowspan="2">
+          <item row="0" column="2">
            <spacer name="horizontalSpacer_2">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -204,24 +266,20 @@
             </property>
            </spacer>
           </item>
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="invertCheckBox">
-            <property name="text">
-             <string>Инвертировать направление</string>
+          <item row="6" column="0" colspan="3">
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
             </property>
-           </widget>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>100</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QTableWidget" name="pointsTableWidget">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>5</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
         </widget>
        </item>
       </layout>

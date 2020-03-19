@@ -27,10 +27,12 @@ private slots:
 
     void on_viewToolButton_clicked();
 
-    void on_modifyToolButton_clicked();
+    void on_buildSlicePushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
+
+    void setBuildSliceWidgetsEnabled(bool enabled);
 };
 
 #endif // MAINWINDOW_H

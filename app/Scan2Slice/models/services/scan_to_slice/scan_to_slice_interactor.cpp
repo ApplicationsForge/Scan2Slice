@@ -5,13 +5,13 @@ ScanToSliceInteractor::ScanToSliceInteractor()
 
 }
 
-QList<Point3D> ScanToSliceInteractor::execute(QList<Point3D> points, double distanceToZero, bool inverted)
+QList<Point3D> ScanToSliceInteractor::execute(QList<Point3D> points, double distanceToZero, int step, int figureRotationAngle)
 {
     points = ScanToSliceInteractor::moveToZero(points, distanceToZero);
 
     for(int i = 0; i < points.length(); i++)
     {
-        rotate(points[i], i, inverted);
+        rotate(points[i], i + figureRotationAngle + (step - 1) * i);
     }
 
     return points;
@@ -29,7 +29,7 @@ QList<Point3D> ScanToSliceInteractor::moveToZero(QList<Point3D> points, double d
     return points;
 }
 
-void ScanToSliceInteractor::rotate(Point3D &point, int i, bool inverted)
+void ScanToSliceInteractor::rotate(Point3D &point, int i)
 {
     // перевод градусов в радианы
     double angle = i * M_PI / 180;
@@ -44,16 +44,8 @@ void ScanToSliceInteractor::rotate(Point3D &point, int i, bool inverted)
     double y_ = 0.0;
     double z_ = 0.0;
 
-    if(inverted)
-    {
-        y_ = y * cosAngle + z * sinAngle;
-        z_ = -1 * (y * sinAngle) + z * cosAngle;
-    }
-    else
-    {
-        y_ = y * cosAngle - z * sinAngle;
-        z_ = y * sinAngle + z * cosAngle;
-    }
+    y_ = y * cosAngle - z * sinAngle;
+    z_ = y * sinAngle + z * cosAngle;
 
     point.setY(y_);
     point.setZ(z_);

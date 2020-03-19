@@ -54,6 +54,7 @@ void MainWindow::on_openToolButton_clicked()
         Router &router = Router::getInstance();
         router.getRepository().setPoints(ReadPointsFromFileInteractor::execute());
         this->updatePoints();
+        this->setBuildSliceWidgetsEnabled(true);
     }
     catch (...)
     {
@@ -82,7 +83,7 @@ void MainWindow::on_viewToolButton_clicked()
     }
 }
 
-void MainWindow::on_modifyToolButton_clicked()
+void MainWindow::on_buildSlicePushButton_clicked()
 {
     try
     {
@@ -90,11 +91,21 @@ void MainWindow::on_modifyToolButton_clicked()
         router.getRepository().setPoints(ScanToSliceInteractor::execute(
                                              router.getRepository().points(),
                                              ui->distanceLineEdit->text().toDouble(),
-                                             ui->invertCheckBox->isChecked()));
+                                             ui->stepLineEdit->text().toInt(),
+                                             ui->rotationAngleLineEdit->text().toInt()));
         this->updatePoints();
+    this->setBuildSliceWidgetsEnabled(false);
     }
     catch (...)
     {
         QMessageBox(QMessageBox::Critical, "Error", "Error").exec();
     }
+}
+
+void MainWindow::setBuildSliceWidgetsEnabled(bool enabled)
+{
+    ui->distanceLineEdit->setEnabled(enabled);
+    ui->stepLineEdit->setEnabled(enabled);
+    ui->rotationAngleLineEdit->setEnabled(enabled);
+    ui->buildSlicePushButton->setEnabled(enabled);
 }
