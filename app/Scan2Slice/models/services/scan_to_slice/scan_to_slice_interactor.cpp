@@ -11,14 +11,7 @@ QList<Point3D> ScanToSliceInteractor::execute(QList<Point3D> points, double dist
 
     for(int i = 0; i < points.length(); i++)
     {
-        if(i < 180)
-        {
-            rotate(points[i], i, inverted);
-        }
-        else
-        {
-            rotate(points[i], (i - 180), inverted);
-        }
+        rotate(points[i], i, inverted);
     }
 
     return points;
@@ -27,29 +20,11 @@ QList<Point3D> ScanToSliceInteractor::execute(QList<Point3D> points, double dist
 QList<Point3D> ScanToSliceInteractor::moveToZero(QList<Point3D> points, double distanceToZero)
 {
     int pointsCount = points.length();
-    for(int i = 0; i < std::min(90, pointsCount); i++)
+    for(int i = 0; i < pointsCount; i++)
     {
         points[i].setZ(points[i].z() + distanceToZero);
         points[i].setY(0.0);
         points[i].setX(0.0);
-    }
-
-    if(pointsCount > 90)
-    {
-        for(int i = 90; i < std::min(271, pointsCount); i++)
-        {
-            points[i].setZ(-1*(points[i].z() + distanceToZero));
-            points[i].setY(0.0);
-        }
-    }
-
-    if(pointsCount > 270)
-    {
-        for(int i = 270; i < std::min(360, pointsCount); i++)
-        {
-            points[i].setZ(points[i].z() + distanceToZero);
-            points[i].setY(0.0);
-        }
     }
     return points;
 }
@@ -80,10 +55,6 @@ void ScanToSliceInteractor::rotate(Point3D &point, int i, bool inverted)
         z_ = y * sinAngle + z * cosAngle;
     }
 
-    qDebug() << i << angle << sinAngle << cosAngle << point.y() << point.z() << y_ << z_;
-
     point.setY(y_);
     point.setZ(z_);
-
-    qDebug() << point.x() << point.y() << point.z();
 }
