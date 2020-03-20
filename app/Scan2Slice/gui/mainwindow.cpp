@@ -35,9 +35,9 @@ void MainWindow::updatePoints()
 
     for(int i = 0; i < points.length(); i++)
     {
-        ui->pointsTableWidget->setItem(i, 0, new QTableWidgetItem(QString::number(points[i].x())));
-        ui->pointsTableWidget->setItem(i, 1, new QTableWidgetItem(QString::number(points[i].y())));
-        ui->pointsTableWidget->setItem(i, 2, new QTableWidgetItem(QString::number(points[i].z())));
+        ui->pointsTableWidget->setItem(i, 0, new QTableWidgetItem(points[i].getX()));
+        ui->pointsTableWidget->setItem(i, 1, new QTableWidgetItem(points[i].getY()));
+        ui->pointsTableWidget->setItem(i, 2, new QTableWidgetItem(points[i].getZ()));
     }
 
     for (int i = 0; i < ui->pointsTableWidget->columnCount(); i++)
@@ -112,5 +112,5 @@ void MainWindow::setBuildSliceWidgetsEnabled(bool enabled)
 void MainWindow::on_saveToolButton_clicked()
 {
     Router& router = Router::getInstance();
-    SavePointsToFileInteractor::execute(router.getRepository().points(), "");
+    SavePointsToFileInteractor::execute(router.getRepository().points(), "", " ");
 }

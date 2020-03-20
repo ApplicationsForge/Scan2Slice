@@ -33,7 +33,6 @@ void ScanToSliceInteractor::rotate(Point3D &point, int i)
 {
     // перевод градусов в радианы
     double angle = i * M_PI / 180;
-    //double angle = i * 0.0175;
 
     double cosAngle = cos(angle);
     double sinAngle = sin(angle);

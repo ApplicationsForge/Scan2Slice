@@ -12,7 +12,7 @@ class SavePointsToFileInteractor
 public:
     SavePointsToFileInteractor();
 
-    static void execute(const QList<Point3D> points, QString fileName);
+    static void execute(const QList<Point3D> points, QString fileName, QString separator = " ");
 };
 
 #endif // SAVEPOINTSTOFILEINTERACTOR_H

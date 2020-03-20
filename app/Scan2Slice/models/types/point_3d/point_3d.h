@@ -13,15 +13,19 @@ public:
 
 
     double x() const;
+    QString getX() const;
     void setX(double x);
 
     double y() const;
+    QString getY() const;
     void setY(double y);
 
     double z() const;
+    QString getZ() const;
     void setZ(double z);
 
     QString toGCode();
+    QString toString(QString separator);
 
     static bool cmpX(Point3D p1, Point3D p2);
 

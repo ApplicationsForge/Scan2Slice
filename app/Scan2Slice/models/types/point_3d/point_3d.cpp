@@ -19,6 +19,11 @@ double Point3D::x() const
     return m_x;
 }
 
+QString Point3D::getX() const
+{
+    return QString::number(m_x, 'f', 7);
+}
+
 void Point3D::setX(double x)
 {
     m_x = x;
@@ -27,6 +32,11 @@ void Point3D::setX(double x)
 double Point3D::y() const
 {
     return m_y;
+}
+
+QString Point3D::getY() const
+{
+    return QString::number(m_y, 'f', 7);
 }
 
 void Point3D::setY(double y)
@@ -39,6 +49,11 @@ double Point3D::z() const
     return m_z;
 }
 
+QString Point3D::getZ() const
+{
+    return QString::number(m_z, 'f', 7);
+}
+
 void Point3D::setZ(double z)
 {
     m_z = z;
@@ -46,7 +61,14 @@ void Point3D::setZ(double z)
 
 QString Point3D::toGCode()
 {
-    return "G1 X" + QString::number(m_x) + " Y" + QString::number(m_y) + " Z" + QString::number(m_z);
+    return "G1 X" + this->getX() + " Y" + this->getY() + " Z" + this->getZ();
+}
+
+QString Point3D::toString(QString separator)
+{
+    return this->getX() + separator +
+           this->getY() + separator +
+           this->getZ();
 }
 
 bool Point3D::cmpX(Point3D p1, Point3D p2)
