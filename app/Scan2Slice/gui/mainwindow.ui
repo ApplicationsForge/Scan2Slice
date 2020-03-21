@@ -226,6 +226,9 @@
         </property>
         <item row="5" column="1">
          <widget class="QLabel" name="toleranceXLabel">
+          <property name="toolTip">
+           <string>Допустимое отклонение точек одного среза по оси X</string>
+          </property>
           <property name="text">
            <string>Допустимое отклонение по X, мм:</string>
           </property>
@@ -233,6 +236,9 @@
         </item>
         <item row="4" column="1">
          <widget class="QLabel" name="roationAngleLabel">
+          <property name="toolTip">
+           <string>Поворот всех результирующих срезов на заданный угол</string>
+          </property>
           <property name="text">
            <string>Поворот, град:</string>
           </property>
@@ -334,6 +340,9 @@
         </item>
         <item row="6" column="1">
          <widget class="QCheckBox" name="rotationFixCheckBox">
+          <property name="toolTip">
+           <string>Программный доворот каждого среза на удвоенную величину дискретности снятия точек</string>
+          </property>
           <property name="text">
            <string>Компенсация поворота</string>
           </property>
