@@ -91,11 +91,10 @@ void MainWindow::on_buildSlicePushButton_clicked()
         QList<Scan> scans = router.getRepository().scans();
         for(auto& scan : scans)
         {
-            auto updatedPoints = ScanToSliceInteractor::execute(scan.points(),
+            ScanToSliceInteractor::execute(scan,
                                            ui->distanceLineEdit->text().toDouble(),
                                            ui->stepLineEdit->text().toInt(),
                                            ui->rotationAngleLineEdit->text().toInt());
-            scan.setPoints(updatedPoints);
         }
         router.getRepository().setScans(scans);
         this->updatePoints();

@@ -5,28 +5,29 @@ ScanToSliceInteractor::ScanToSliceInteractor()
 
 }
 
-QList<Point3D> ScanToSliceInteractor::execute(QList<Point3D> points, double distanceToZero, int step, int figureRotationAngle)
+void ScanToSliceInteractor::execute(Scan &s, double distanceToZero, int step, int figureRotationAngle)
 {
-    points = ScanToSliceInteractor::moveToZero(points, distanceToZero);
-
+    ScanToSliceInteractor::moveToZero(s, distanceToZero);
+    QList<Point3D> points = s.points();
     for(int i = 0; i < points.length(); i++)
     {
         rotate(points[i], i + figureRotationAngle + (step - 1) * i);
     }
-
-    return points;
+    s.setPoints(points);
 }
 
-QList<Point3D> ScanToSliceInteractor::moveToZero(QList<Point3D> points, double distanceToZero)
+void ScanToSliceInteractor::moveToZero(Scan &s, double distanceToZero)
 {
+    QList<Point3D> points = s.points();
     int pointsCount = points.length();
+    double medianX = Scan::medianX(points);
     for(int i = 0; i < pointsCount; i++)
     {
         points[i].setZ(points[i].z() + distanceToZero);
         points[i].setY(0.0);
-        points[i].setX(0.0);
+        points[i].setX(medianX);
     }
-    return points;
+    s.setPoints(points);
 }
 
 void ScanToSliceInteractor::rotate(Point3D &point, int i)
