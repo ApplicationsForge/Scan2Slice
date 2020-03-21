@@ -26,6 +26,7 @@ void MainWindow::updatePoints()
     Router &router = Router::getInstance();
     QList<Point3D> points = router.getRepository().points();
 
+
     ui->pointsTableWidget->clear();
 
     ui->pointsTableWidget->setRowCount(points.length());
@@ -51,7 +52,7 @@ void MainWindow::on_openToolButton_clicked()
     try
     {
         Router &router = Router::getInstance();
-        router.getRepository().setPoints(ReadPointsFromFileInteractor::execute());
+        router.getRepository().setScans(SplitToScansInteractor::execute(ReadPointsFromFileInteractor::execute()));
         this->updatePoints();
         this->setBuildSliceWidgetsEnabled(true);
     }
@@ -87,11 +88,16 @@ void MainWindow::on_buildSlicePushButton_clicked()
     try
     {
         Router &router = Router::getInstance();
-        router.getRepository().setPoints(ScanToSliceInteractor::execute(
-                                             router.getRepository().points(),
-                                             ui->distanceLineEdit->text().toDouble(),
-                                             ui->stepLineEdit->text().toInt(),
-                                             ui->rotationAngleLineEdit->text().toInt()));
+        QList<Scan> scans = router.getRepository().scans();
+        for(auto& scan : scans)
+        {
+            auto updatedPoints = ScanToSliceInteractor::execute(scan.points(),
+                                           ui->distanceLineEdit->text().toDouble(),
+                                           ui->stepLineEdit->text().toInt(),
+                                           ui->rotationAngleLineEdit->text().toInt());
+            scan.setPoints(updatedPoints);
+        }
+        router.getRepository().setScans(scans);
         this->updatePoints();
     this->setBuildSliceWidgetsEnabled(false);
     }

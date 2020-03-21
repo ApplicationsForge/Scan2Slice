@@ -9,6 +9,7 @@
 #include "models/services/gcodes_view/gcodes_view_interactor.h"
 #include "models/services/scan_to_slice/scan_to_slice_interactor.h"
 #include "models/services/save_points_to_file/save_points_to_file_interactor.h"
+#include "models/services/split_to_scans/split_to_scans_interactor.h"
 
 namespace Ui {
 class MainWindow;

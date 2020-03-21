@@ -4,25 +4,25 @@ Repository::Repository(QObject *parent) : QObject(parent)
 {
     SettingsManager s;
     m_gCodesViewer = s.get("ExternalTools", "GCodesViewer").toString();
-    m_points = {};
+    m_scans = {};
 }
 
-QString Repository::helloString() const
+QList<Scan> Repository::scans() const
 {
-    return m_helloString;
+    return m_scans;
 }
 
-void Repository::setHelloString(const QString &helloString)
+void Repository::setScans(const QList<Scan> &scans)
 {
-    m_helloString = helloString;
+    m_scans = scans;
 }
 
 QList<Point3D> Repository::points() const
 {
-    return m_points;
-}
-
-void Repository::setPoints(const QList<Point3D> &points)
-{
-    m_points = points;
+    QList<Point3D> result = {};
+    for(auto slice : m_scans)
+    {
+        result.append(slice.points());
+    }
+    return result;
 }

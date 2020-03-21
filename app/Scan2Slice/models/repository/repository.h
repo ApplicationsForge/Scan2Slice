@@ -6,6 +6,7 @@
 #include "models/settings_manager/settings_manager.h"
 
 #include "models/types/point_3d/point_3d.h"
+#include "models/types/scan/scan.h"
 
 class Router;
 
@@ -15,16 +16,14 @@ class Repository : public QObject
 public:
     explicit Repository(QObject *parent = nullptr);
 
-    QString helloString() const;
-    void setHelloString(const QString &helloString);
+    QList<Scan> scans() const;
+    void setScans(const QList<Scan> &scans);
 
     QList<Point3D> points() const;
-    void setPoints(const QList<Point3D> &points);
 
 private:
-    QString m_helloString = "Hello World!";
     QString m_gCodesViewer;
-    QList<Point3D> m_points;
+    QList<Scan> m_scans;
 
     friend class Router;
 
