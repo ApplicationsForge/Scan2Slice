@@ -5,6 +5,7 @@ Repository::Repository(QObject *parent) : QObject(parent)
     SettingsManager s;
     m_gCodesViewer = s.get("ExternalTools", "GCodesViewer").toString();
     m_scans = {};
+    m_openedFileName = "";
 }
 
 QList<Scan> Repository::scans() const
@@ -25,4 +26,14 @@ QList<Point3D> Repository::points() const
         result.append(slice.points());
     }
     return result;
+}
+
+QString Repository::openedFileName() const
+{
+    return m_openedFileName;
+}
+
+void Repository::setOpenedFileName(const QString &openedFileName)
+{
+    m_openedFileName = openedFileName;
 }

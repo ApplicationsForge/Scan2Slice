@@ -4,5 +4,6 @@
         <file>images/play.png</file>
         <file>images/save.png</file>
         <file>images/view.png</file>
+        <file>images/sync.png</file>
     </qresource>
 </RCC>

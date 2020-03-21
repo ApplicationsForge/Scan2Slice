@@ -5,10 +5,17 @@ ReadPointsFromFileInteractor::ReadPointsFromFileInteractor()
 
 }
 
-QList<Point3D> ReadPointsFromFileInteractor::execute()
+QList<Point3D> ReadPointsFromFileInteractor::execute(QString fileName)
 {
-    QString fileName = QFileDialog::getOpenFileName(nullptr, "Выберите файл с точками", "", "*.txt");
+    if((fileName == "") or !QFile::exists(fileName))
+    {
+       fileName = QFileDialog::getOpenFileName(nullptr, "Выберите файл с точками", "", "*.txt");
+    }
+
     if(!QFile::exists(fileName)) return {};
+
+    Router& router = Router::getInstance();
+    router.getRepository().setOpenedFileName(fileName);
 
     QFile file(fileName);
     if(!file.open(QIODevice::ReadWrite | QIODevice::Text))

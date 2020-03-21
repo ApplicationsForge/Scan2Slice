@@ -33,6 +33,8 @@ private slots:
 
     void on_saveToolButton_clicked();
 
+    void on_reloadFilePushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 

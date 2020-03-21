@@ -52,7 +52,7 @@ void MainWindow::on_openToolButton_clicked()
     try
     {
         Router &router = Router::getInstance();
-        router.getRepository().setScans({ Scan(ReadPointsFromFileInteractor::execute()) });
+        router.getRepository().setScans({ Scan(ReadPointsFromFileInteractor::execute(router.getRepository().openedFileName())) });
         this->updatePoints();
         this->setBuildSliceWidgetsEnabled(true);
     }
@@ -123,4 +123,9 @@ void MainWindow::on_saveToolButton_clicked()
 {
     Router& router = Router::getInstance();
     SavePointsToFileInteractor::execute(router.getRepository().points(), "", " ");
+}
+
+void MainWindow::on_reloadFilePushButton_clicked()
+{
+    this->on_openToolButton_clicked();
 }

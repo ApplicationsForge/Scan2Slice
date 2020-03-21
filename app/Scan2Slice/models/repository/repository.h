@@ -21,8 +21,12 @@ public:
 
     QList<Point3D> points() const;
 
+    QString openedFileName() const;
+    void setOpenedFileName(const QString &openedFileName);
+
 private:
     QString m_gCodesViewer;
+    QString m_openedFileName;
     QList<Scan> m_scans;
 
     friend class Router;
