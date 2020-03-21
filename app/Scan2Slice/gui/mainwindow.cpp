@@ -111,11 +111,7 @@ void MainWindow::on_buildSlicePushButton_clicked()
 
 void MainWindow::setBuildSliceWidgetsEnabled(bool enabled)
 {
-    ui->distanceLineEdit->setEnabled(enabled);
-    ui->stepLineEdit->setEnabled(enabled);
-    ui->rotationAngleLineEdit->setEnabled(enabled);
     ui->buildSlicePushButton->setEnabled(enabled);
-    ui->toleranceXLineEdit->setEnabled(enabled);
 }
 
 void MainWindow::on_saveToolButton_clicked()
