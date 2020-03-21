@@ -11,11 +11,23 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Scan2Slice</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
+   <layout class="QGridLayout" name="gridLayout_3">
+    <property name="leftMargin">
+     <number>12</number>
+    </property>
+    <property name="topMargin">
+     <number>12</number>
+    </property>
+    <property name="rightMargin">
+     <number>12</number>
+    </property>
+    <property name="bottomMargin">
+     <number>12</number>
+    </property>
+    <item row="0" column="0">
      <widget class="QWidget" name="toolBarWidget" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -115,7 +127,7 @@
       </layout>
      </widget>
     </item>
-    <item>
+    <item row="1" column="0">
      <widget class="QWidget" name="pointsWidget" native="true">
       <layout class="QGridLayout" name="gridLayout_2">
        <property name="leftMargin">
@@ -178,17 +190,20 @@
     <number>2</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents">
-    <layout class="QGridLayout" name="gridLayout_3">
+    <layout class="QVBoxLayout" name="verticalLayout">
      <property name="leftMargin">
-      <number>0</number>
+      <number>12</number>
+     </property>
+     <property name="topMargin">
+      <number>12</number>
      </property>
      <property name="rightMargin">
-      <number>0</number>
+      <number>12</number>
      </property>
      <property name="bottomMargin">
-      <number>0</number>
+      <number>12</number>
      </property>
-     <item row="0" column="0">
+     <item>
       <widget class="QWidget" name="scanToSliceParamsWidget" native="true">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -209,20 +224,14 @@
         <property name="bottomMargin">
          <number>0</number>
         </property>
-        <item row="3" column="0">
-         <widget class="QLabel" name="stepLabel">
-          <property name="toolTip">
-           <string>Дискретность снятия точек, градусы</string>
-          </property>
+        <item row="5" column="1">
+         <widget class="QLabel" name="toleranceXLabel">
           <property name="text">
-           <string>Дискретность, град:</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           <string>Допустимое отклонение по X, мм:</string>
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
+        <item row="4" column="1">
          <widget class="QLabel" name="roationAngleLabel">
           <property name="text">
            <string>Поворот, град:</string>
@@ -232,7 +241,7 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
+        <item row="3" column="2">
          <widget class="QLineEdit" name="stepLineEdit">
           <property name="text">
            <string>1</string>
@@ -242,24 +251,20 @@
           </property>
          </widget>
         </item>
-        <item row="6" column="0" colspan="2">
-         <widget class="QPushButton" name="buildSlicePushButton">
-          <property name="text">
-           <string>Преобразовать</string>
+        <item row="8" column="1" colspan="3">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
           </property>
-          <property name="icon">
-           <iconset resource="resources/resources.qrc">
-            <normaloff>:/images/images/play.png</normaloff>:/images/images/play.png</iconset>
-          </property>
-          <property name="iconSize">
+          <property name="sizeHint" stdset="0">
            <size>
-            <width>32</width>
-            <height>32</height>
+            <width>20</width>
+            <height>100</height>
            </size>
           </property>
-         </widget>
+         </spacer>
         </item>
-        <item row="0" column="1">
+        <item row="0" column="2">
          <widget class="QLineEdit" name="distanceLineEdit">
           <property name="minimumSize">
            <size>
@@ -278,30 +283,7 @@
           </property>
          </widget>
         </item>
-        <item row="7" column="0" colspan="3">
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>100</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="4" column="1">
-         <widget class="QLineEdit" name="rotationAngleLineEdit">
-          <property name="text">
-           <string>0</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
+        <item row="0" column="1">
          <widget class="QLabel" name="distanceLabel">
           <property name="toolTip">
            <string>Расстояние от сканера до оси вращения, мм</string>
@@ -314,14 +296,30 @@
           </property>
          </widget>
         </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="toleranceXLabel">
+        <item row="3" column="1">
+         <widget class="QLabel" name="stepLabel">
+          <property name="toolTip">
+           <string>Дискретность снятия точек, градусы</string>
+          </property>
           <property name="text">
-           <string>Допустимое отклонение по X, мм:</string>
+           <string>Дискретность, град:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
-        <item row="5" column="1">
+        <item row="4" column="2">
+         <widget class="QLineEdit" name="rotationAngleLineEdit">
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="2">
          <widget class="QLineEdit" name="toleranceXLineEdit">
           <property name="inputMethodHints">
            <set>Qt::ImhPreferNumbers</set>
@@ -331,6 +329,58 @@
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QWidget" name="modifyButtonsWidget" native="true">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="revertPushButton">
+          <property name="text">
+           <string>Отменить</string>
+          </property>
+          <property name="icon">
+           <iconset resource="resources/resources.qrc">
+            <normaloff>:/images/images/play.png</normaloff>:/images/images/play.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="buildSlicePushButton">
+          <property name="text">
+           <string>Преобразовать</string>
+          </property>
+          <property name="icon">
+           <iconset resource="resources/resources.qrc">
+            <normaloff>:/images/images/play.png</normaloff>:/images/images/play.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
           </property>
          </widget>
         </item>

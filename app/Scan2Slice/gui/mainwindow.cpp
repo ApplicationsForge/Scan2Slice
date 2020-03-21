@@ -88,10 +88,8 @@ void MainWindow::on_buildSlicePushButton_clicked()
     try
     {
         Router &router = Router::getInstance();
-        router.getRepository().setScans(SplitToScansInteractor::execute(router.getRepository().points(),
-                                                                        ui->toleranceXLineEdit->text().toDouble()));
-
-        QList<Scan> scans = router.getRepository().scans();
+        QList<Scan> scans = SplitToScansInteractor::execute(router.getRepository().points(),
+                                                            ui->toleranceXLineEdit->text().toDouble());
         for(auto& scan : scans)
         {
             ScanToSliceInteractor::execute(scan,
@@ -101,7 +99,7 @@ void MainWindow::on_buildSlicePushButton_clicked()
         }
         router.getRepository().setScans(scans);
         this->updatePoints();
-    this->setBuildSliceWidgetsEnabled(false);
+        this->setBuildSliceWidgetsEnabled(false);
     }
     catch (...)
     {
