@@ -12,7 +12,7 @@ class ScanToSliceInteractor
 public:
     ScanToSliceInteractor();
 
-    static void execute(Scan &s, double distanceToZero, int step = 1, int figureRotationAngle = 0);
+    static void execute(Scan &s, double distanceToZero, int step = 1, int sliceRotationAngle = 0);
 
 private:
     static void moveToZero(Scan &s, double distanceToZero);

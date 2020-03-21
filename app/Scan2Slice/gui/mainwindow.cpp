@@ -90,12 +90,19 @@ void MainWindow::on_buildSlicePushButton_clicked()
         Router &router = Router::getInstance();
         QList<Scan> scans = SplitToScansInteractor::execute(router.getRepository().points(),
                                                             ui->toleranceXLineEdit->text().toDouble());
+
+
+        int step = ui->stepLineEdit->text().toInt();
+        int rotationAngle = ui->rotationAngleLineEdit->text().toInt();
+
+        int i = 0;
         for(auto& scan : scans)
         {
             ScanToSliceInteractor::execute(scan,
                                            ui->distanceLineEdit->text().toDouble(),
-                                           ui->stepLineEdit->text().toInt(),
-                                           ui->rotationAngleLineEdit->text().toInt());
+                                           step,
+                                           rotationAngle - step * i * 2);
+            i++;
         }
         router.getRepository().setScans(scans);
         this->updatePoints();

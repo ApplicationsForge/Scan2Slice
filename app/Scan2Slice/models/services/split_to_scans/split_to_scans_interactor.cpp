@@ -7,7 +7,6 @@ SplitToScansInteractor::SplitToScansInteractor()
 
 QList<Scan> SplitToScansInteractor::execute(QList<Point3D> points, double toleranceX)
 {
-    qDebug() << toleranceX;
     if(points.length() <= 0) return {};
     if(points.length() == 1) return { Scan(points) };
 
