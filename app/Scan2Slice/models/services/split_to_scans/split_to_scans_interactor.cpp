@@ -5,8 +5,9 @@ SplitToScansInteractor::SplitToScansInteractor()
 
 }
 
-QList<Scan> SplitToScansInteractor::execute(QList<Point3D> points)
+QList<Scan> SplitToScansInteractor::execute(QList<Point3D> points, double toleranceX)
 {
+    qDebug() << toleranceX;
     if(points.length() <= 0) return {};
     if(points.length() == 1) return { Scan(points) };
 
@@ -14,7 +15,7 @@ QList<Scan> SplitToScansInteractor::execute(QList<Point3D> points)
 
     for(int i = 1; i < points.length(); i++)
     {
-        if((points[i].x() - points[i-1].x()) > 0.071)
+        if((points[i].x() - points[i-1].x()) > toleranceX)
         {
             result.append(Scan({ points[i] }));
         }

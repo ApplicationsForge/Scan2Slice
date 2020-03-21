@@ -161,43 +161,13 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item row="5" column="0" colspan="2">
-           <widget class="QPushButton" name="buildSlicePushButton">
-            <property name="text">
-             <string>Преобразовать</string>
-            </property>
-            <property name="icon">
-             <iconset resource="resources/resources.qrc">
-              <normaloff>:/images/images/play.png</normaloff>:/images/images/play.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>32</width>
-              <height>32</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="distanceLabel">
-            <property name="toolTip">
-             <string>Расстояние от сканера до оси вращения, мм</string>
-            </property>
-            <property name="text">
-             <string>Расстояние:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
           <item row="3" column="0">
            <widget class="QLabel" name="stepLabel">
             <property name="toolTip">
              <string>Дискретность снятия точек, градусы</string>
             </property>
             <property name="text">
-             <string>Дискретность:</string>
+             <string>Дискретность, град:</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -207,7 +177,7 @@
           <item row="4" column="0">
            <widget class="QLabel" name="roationAngleLabel">
             <property name="text">
-             <string>Поворот:</string>
+             <string>Поворот, град:</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -224,15 +194,35 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
-           <widget class="QLineEdit" name="rotationAngleLineEdit">
+          <item row="6" column="0" colspan="2">
+           <widget class="QPushButton" name="buildSlicePushButton">
             <property name="text">
-             <string>0</string>
+             <string>Преобразовать</string>
             </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
+            <property name="icon">
+             <iconset resource="resources/resources.qrc">
+              <normaloff>:/images/images/play.png</normaloff>:/images/images/play.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
             </property>
            </widget>
+          </item>
+          <item row="0" column="2">
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
           <item row="0" column="1">
            <widget class="QLineEdit" name="distanceLineEdit">
@@ -253,20 +243,7 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="2">
-           <spacer name="horizontalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="6" column="0" colspan="3">
+          <item row="7" column="0" colspan="3">
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -278,6 +255,49 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="rotationAngleLineEdit">
+            <property name="text">
+             <string>0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="distanceLabel">
+            <property name="toolTip">
+             <string>Расстояние от сканера до оси вращения, мм</string>
+            </property>
+            <property name="text">
+             <string>Расстояние, мм:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="toleranceXLabel">
+            <property name="text">
+             <string>Допустимое отклонение по X, мм:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="toleranceXLineEdit">
+            <property name="inputMethodHints">
+             <set>Qt::ImhPreferNumbers</set>
+            </property>
+            <property name="text">
+             <string>1</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>

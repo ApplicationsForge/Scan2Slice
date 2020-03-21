@@ -52,7 +52,8 @@ void MainWindow::on_openToolButton_clicked()
     try
     {
         Router &router = Router::getInstance();
-        router.getRepository().setScans(SplitToScansInteractor::execute(ReadPointsFromFileInteractor::execute()));
+        router.getRepository().setScans(SplitToScansInteractor::execute(ReadPointsFromFileInteractor::execute(),
+                                                                        ui->toleranceXLineEdit->text().toDouble()));
         this->updatePoints();
         this->setBuildSliceWidgetsEnabled(true);
     }
@@ -112,6 +113,7 @@ void MainWindow::setBuildSliceWidgetsEnabled(bool enabled)
     ui->stepLineEdit->setEnabled(enabled);
     ui->rotationAngleLineEdit->setEnabled(enabled);
     ui->buildSlicePushButton->setEnabled(enabled);
+    ui->toleranceXLineEdit->setEnabled(enabled);
 }
 
 void MainWindow::on_saveToolButton_clicked()

@@ -7,13 +7,16 @@ ScanToSliceInteractor::ScanToSliceInteractor()
 
 void ScanToSliceInteractor::execute(Scan &s, double distanceToZero, int step, int figureRotationAngle)
 {
+    //qDebug() << "begin" << Scan::medianX(s.points());
     ScanToSliceInteractor::moveToZero(s, distanceToZero);
     QList<Point3D> points = s.points();
     for(int i = 0; i < points.length(); i++)
     {
+        //qDebug() << i + figureRotationAngle + (step - 1) * i;
         rotate(points[i], i + figureRotationAngle + (step - 1) * i);
     }
     s.setPoints(points);
+    //qDebug() << "end";
 }
 
 void ScanToSliceInteractor::moveToZero(Scan &s, double distanceToZero)
