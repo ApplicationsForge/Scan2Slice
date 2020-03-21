@@ -94,14 +94,16 @@ void MainWindow::on_buildSlicePushButton_clicked()
 
         int step = ui->stepLineEdit->text().toInt();
         int rotationAngle = ui->rotationAngleLineEdit->text().toInt();
+        bool rotationFix = ui->rotationFixCheckBox->isChecked();
 
         int i = 0;
         for(auto& scan : scans)
         {
+
             ScanToSliceInteractor::execute(scan,
                                            ui->distanceLineEdit->text().toDouble(),
                                            step,
-                                           rotationAngle - step * i * 2);
+                                           rotationFix ? rotationAngle - step * i * 2 : rotationAngle);
             i++;
         }
         router.getRepository().setScans(scans);
