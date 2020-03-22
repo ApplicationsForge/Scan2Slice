@@ -52,9 +52,8 @@ void MainWindow::on_openToolButton_clicked()
     try
     {
         Router &router = Router::getInstance();
-        router.getRepository().setScans({ Scan(ReadPointsFromFileInteractor::execute(router.getRepository().openedFileName())) });
-        this->updatePoints();
-        this->setBuildSliceWidgetsEnabled(true);
+        router.getRepository().setOpenedFileName("");
+        this->on_reloadFilePushButton_clicked();
     }
     catch (...)
     {
@@ -129,5 +128,16 @@ void MainWindow::on_saveToolButton_clicked()
 
 void MainWindow::on_reloadFilePushButton_clicked()
 {
-    this->on_openToolButton_clicked();
+    try
+    {
+        Router &router = Router::getInstance();
+        router.getRepository().setScans({ Scan(ReadPointsFromFileInteractor::execute(router.getRepository().openedFileName())) });
+        this->updatePoints();
+        this->setBuildSliceWidgetsEnabled(true);
+    }
+    catch (...)
+    {
+        ui->pointsTableWidget->clear();
+        QMessageBox(QMessageBox::Critical, "Error", "Error").exec();
+    }
 }
