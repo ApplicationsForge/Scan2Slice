@@ -224,15 +224,31 @@
         <property name="bottomMargin">
          <number>0</number>
         </property>
-        <item row="5" column="1">
-         <widget class="QLabel" name="toleranceXLabel">
+        <item row="3" column="1">
+         <widget class="QLabel" name="stepLabel">
           <property name="toolTip">
-           <string>Допустимое отклонение точек одного среза по оси X</string>
+           <string>Дискретность снятия точек, градусы</string>
           </property>
           <property name="text">
-           <string>Допустимое отклонение по X, мм:</string>
+           <string>Дискретность, град:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
           </property>
          </widget>
+        </item>
+        <item row="9" column="1" colspan="3">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>100</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item row="4" column="1">
          <widget class="QLabel" name="roationAngleLabel">
@@ -246,29 +262,6 @@
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
           </property>
          </widget>
-        </item>
-        <item row="3" column="2">
-         <widget class="QLineEdit" name="stepLineEdit">
-          <property name="text">
-           <string>1</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="1" colspan="3">
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>100</height>
-           </size>
-          </property>
-         </spacer>
         </item>
         <item row="0" column="2">
          <widget class="QLineEdit" name="distanceLineEdit">
@@ -289,43 +282,7 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
-         <widget class="QLabel" name="distanceLabel">
-          <property name="toolTip">
-           <string>Расстояние от сканера до оси вращения, мм</string>
-          </property>
-          <property name="text">
-           <string>Расстояние, мм:</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QLabel" name="stepLabel">
-          <property name="toolTip">
-           <string>Дискретность снятия точек, градусы</string>
-          </property>
-          <property name="text">
-           <string>Дискретность, град:</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="2">
-         <widget class="QLineEdit" name="rotationAngleLineEdit">
-          <property name="text">
-           <string>0</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="2">
+        <item row="6" column="2">
          <widget class="QLineEdit" name="toleranceXLineEdit">
           <property name="inputMethodHints">
            <set>Qt::ImhPreferNumbers</set>
@@ -339,12 +296,62 @@
          </widget>
         </item>
         <item row="6" column="1">
+         <widget class="QLabel" name="toleranceXLabel">
+          <property name="toolTip">
+           <string>Допустимое отклонение точек одного среза по оси X</string>
+          </property>
+          <property name="text">
+           <string>Допустимое отклонение по X, мм:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="distanceLabel">
+          <property name="toolTip">
+           <string>Расстояние от сканера до оси вращения, мм</string>
+          </property>
+          <property name="text">
+           <string>Расстояние от лазера, мм:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QLineEdit" name="stepLineEdit">
+          <property name="text">
+           <string>1</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="2">
+         <widget class="QLineEdit" name="rotationAngleLineEdit">
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
          <widget class="QCheckBox" name="rotationFixCheckBox">
           <property name="toolTip">
            <string>Программный доворот каждого среза на удвоенную величину дискретности снятия точек</string>
           </property>
           <property name="text">
            <string>Компенсация поворота</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QCheckBox" name="spiralScanCheckBox">
+          <property name="text">
+           <string>Сканирование по спирали</string>
           </property>
          </widget>
         </item>

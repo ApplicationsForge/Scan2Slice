@@ -86,26 +86,21 @@ void MainWindow::on_buildSlicePushButton_clicked()
 {
     try
     {
-        Router &router = Router::getInstance();
-        QList<Scan> scans = SplitToScansInteractor::execute(router.getRepository().points(),
-                                                            ui->toleranceXLineEdit->text().toDouble());
-
-
+        double distanceFromLaser = ui->distanceLineEdit->text().toDouble();
         int step = ui->stepLineEdit->text().toInt();
-        int rotationAngle = ui->rotationAngleLineEdit->text().toInt();
-        bool rotationFix = ui->rotationFixCheckBox->isChecked();
+        int generalRotationAngle = ui->rotationAngleLineEdit->text().toInt();
 
-        int i = 0;
-        for(auto& scan : scans)
+        if(ui->spiralScanCheckBox->isChecked())
         {
-
-            ScanToSliceInteractor::execute(scan,
-                                           ui->distanceLineEdit->text().toDouble(),
-                                           step,
-                                           rotationFix ? rotationAngle - step * i * 2 : rotationAngle);
-            i++;
+            SpiralScanInteractor::execute(distanceFromLaser, step, generalRotationAngle);
         }
-        router.getRepository().setScans(scans);
+        else
+        {
+            bool useRotationFix = ui->rotationFixCheckBox->isChecked();
+            double toleranceX = ui->toleranceXLineEdit->text().toDouble();
+            SliceScanInteractor::execute(distanceFromLaser, step, toleranceX, generalRotationAngle, useRotationFix);
+        }
+
         this->updatePoints();
         this->setBuildSliceWidgetsEnabled(false);
     }
@@ -139,5 +134,21 @@ void MainWindow::on_reloadFilePushButton_clicked()
     {
         ui->pointsTableWidget->clear();
         QMessageBox(QMessageBox::Critical, "Error", "Error").exec();
+    }
+}
+
+void MainWindow::on_spiralScanCheckBox_clicked()
+{
+    if(ui->spiralScanCheckBox->isChecked())
+    {
+        ui->toleranceXLabel->setEnabled(false);
+        ui->toleranceXLineEdit->setEnabled(false);
+        ui->rotationFixCheckBox->setEnabled(false);
+    }
+    else
+    {
+        ui->toleranceXLabel->setEnabled(true);
+        ui->toleranceXLineEdit->setEnabled(true);
+        ui->rotationFixCheckBox->setEnabled(true);
     }
 }

@@ -33,6 +33,8 @@ SOURCES += \
     models/services/read_points_from_file/read_points_from_file_interactor.cpp \
     models/services/save_points_to_file/save_points_to_file_interactor.cpp \
     models/services/scan_to_slice/scan_to_slice_interactor.cpp \
+    models/services/slice_scan/slice_scan_interactor.cpp \
+    models/services/spiral_scan/spiral_scan_interactor.cpp \
     models/services/split_to_scans/split_to_scans_interactor.cpp \
     models/settings_manager/settings_manager.cpp \
     models/types/point_3d/point_3d.cpp \
@@ -46,6 +48,8 @@ HEADERS += \
     models/services/read_points_from_file/read_points_from_file_interactor.h \
     models/services/save_points_to_file/save_points_to_file_interactor.h \
     models/services/scan_to_slice/scan_to_slice_interactor.h \
+    models/services/slice_scan/slice_scan_interactor.h \
+    models/services/spiral_scan/spiral_scan_interactor.h \
     models/services/split_to_scans/split_to_scans_interactor.h \
     models/settings_manager/settings_manager.h \
     models/types/point_3d/point_3d.h \
