@@ -4,6 +4,9 @@
 #include <QString>
 #include <QProcess>
 #include <QMessageBox>
+#include <QTemporaryFile>
+#include <QDebug>
+#include <QDir>
 #include "models/settings_manager/settings_manager.h"
 
 class GCodesViewInteractor
@@ -16,6 +19,7 @@ public:
 
 private:
     static QString getViewerPath();
+    static QString createTmpFile(QStringList gcodes);
 };
 
 #endif // GCODESVIEWINTERACTOR_H
