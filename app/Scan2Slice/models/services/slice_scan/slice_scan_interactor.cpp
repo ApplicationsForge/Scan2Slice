@@ -5,7 +5,7 @@ SliceScanInteractor::SliceScanInteractor()
 
 }
 
-void SliceScanInteractor::execute(double distanceFromLaser, int step, double toleranceX, int generalRotationAngle, bool useRotationFix)
+void SliceScanInteractor::execute(double distanceFromLaser, double step, double toleranceX, double generalRotationAngle, bool useRotationFix)
 {
     Router &router = Router::getInstance();
     QList<Scan> scans = SplitToScansInteractor::execute(router.getRepository().points(), toleranceX);
@@ -13,7 +13,6 @@ void SliceScanInteractor::execute(double distanceFromLaser, int step, double tol
     int i = 0;
     for(auto& scan : scans)
     {
-
         ScanToSliceInteractor::execute(scan,
                                        distanceFromLaser,
                                        step,

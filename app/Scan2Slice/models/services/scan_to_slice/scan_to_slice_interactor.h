@@ -12,11 +12,16 @@ class ScanToSliceInteractor
 public:
     ScanToSliceInteractor();
 
-    static void execute(Scan &s, double distanceToZero, int step = 1, int sliceRotationAngle = 0, bool useMedianX = false);
+    static void execute(Scan &s,
+                        double distanceToZero,
+                        double step = 1,
+                        double generalRotationAngle = 0,
+                        bool useMedianX = false,
+                        bool useMod360 = true);
 
 private:
     static void moveToZero(Scan &s, double distanceToZero, bool useMedianX);
-    static void rotate(Point3D &point, int i);
+    static void rotate(Point3D &point, double i);
 };
 
 #endif // SCANTOSLICEINTERACTOR_H

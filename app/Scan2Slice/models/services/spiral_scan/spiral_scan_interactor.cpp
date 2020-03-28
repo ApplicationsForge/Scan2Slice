@@ -5,7 +5,7 @@ SpiralScanInteractor::SpiralScanInteractor()
 
 }
 
-void SpiralScanInteractor::execute(double distanceFromLaser, int step, int generalRotationAngle)
+void SpiralScanInteractor::execute(double distanceFromLaser, double step, double generalRotationAngle)
 {
     Router &router = Router::getInstance();
     Scan s = SpiralScanInteractor::joinScans(router.getRepository().scans());

@@ -15,7 +15,7 @@ public:
      * @param step - дискретность задания точек в градусах
      * @param generalRotationAngle - угол на который нужно повернуть все точки
      */
-    static void execute(double distanceFromLaser, int step, int generalRotationAngle = 0);
+    static void execute(double distanceFromLaser, double step, double generalRotationAngle = 0);
 
 private:
     static Scan joinScans(const QList<Scan> &scans);

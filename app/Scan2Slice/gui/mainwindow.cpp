@@ -87,8 +87,8 @@ void MainWindow::on_buildSlicePushButton_clicked()
     try
     {
         double distanceFromLaser = ui->distanceLineEdit->text().toDouble();
-        int step = ui->stepLineEdit->text().toInt();
-        int generalRotationAngle = ui->rotationAngleLineEdit->text().toInt();
+        double step = ui->stepLineEdit->text().toDouble();
+        double generalRotationAngle = ui->rotationAngleLineEdit->text().toDouble();
 
         if(ui->spiralScanCheckBox->isChecked())
         {

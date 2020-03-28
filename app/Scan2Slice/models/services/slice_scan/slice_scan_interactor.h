@@ -18,7 +18,7 @@ public:
      * @param generalRotationAngle - угол на который нужно повернуть все точки
      * @param useRotationFix - нужно ли использовать автокоррекцию вращения
      */
-    static void execute(double distanceFromLaser, int step, double toleranceX, int generalRotationAngle = 0, bool useRotationFix = false);
+    static void execute(double distanceFromLaser, double step, double toleranceX, double generalRotationAngle = 0, bool useRotationFix = false);
 };
 
 #endif // SLICESCANINTERACTOR_H
