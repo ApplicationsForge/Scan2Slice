@@ -90,15 +90,22 @@ void MainWindow::on_buildSlicePushButton_clicked()
         double step = ui->stepLineEdit->text().toDouble();
         double generalRotationAngle = ui->rotationAngleLineEdit->text().toDouble();
 
-        if(ui->spiralScanCheckBox->isChecked())
+        //if(ui->spiralScanCheckBox->isChecked())
+        switch(ui->scanTypeTabWidget->currentIndex())
         {
-            SpiralScanInteractor::execute(distanceFromLaser, step, generalRotationAngle);
+        case 0:
+        {
+            double spiralCorrectionAngle = ui->spiralCorrectionAngleLineEdit->text().toDouble();
+            SpiralScanInteractor::execute(distanceFromLaser, step, generalRotationAngle, spiralCorrectionAngle);
+            break;
         }
-        else
+        case 1:
         {
             bool useRotationFix = ui->rotationFixCheckBox->isChecked();
             double toleranceX = ui->toleranceXLineEdit->text().toDouble();
             SliceScanInteractor::execute(distanceFromLaser, step, toleranceX, generalRotationAngle, useRotationFix);
+            break;
+        }
         }
 
         this->updatePoints();
@@ -134,21 +141,5 @@ void MainWindow::on_reloadFilePushButton_clicked()
     {
         ui->pointsTableWidget->clear();
         QMessageBox(QMessageBox::Critical, "Error", "Error").exec();
-    }
-}
-
-void MainWindow::on_spiralScanCheckBox_clicked()
-{
-    if(ui->spiralScanCheckBox->isChecked())
-    {
-        ui->toleranceXLabel->setEnabled(false);
-        ui->toleranceXLineEdit->setEnabled(false);
-        ui->rotationFixCheckBox->setEnabled(false);
-    }
-    else
-    {
-        ui->toleranceXLabel->setEnabled(true);
-        ui->toleranceXLineEdit->setEnabled(true);
-        ui->rotationFixCheckBox->setEnabled(true);
     }
 }

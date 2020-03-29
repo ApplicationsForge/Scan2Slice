@@ -35,8 +35,6 @@ private slots:
 
     void on_reloadFilePushButton_clicked();
 
-    void on_spiralScanCheckBox_clicked();
-
 private:
     Ui::MainWindow *ui;
 

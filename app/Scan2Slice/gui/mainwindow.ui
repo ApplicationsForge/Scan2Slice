@@ -191,6 +191,9 @@
    </attribute>
    <widget class="QWidget" name="dockWidgetContents">
     <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="spacing">
+      <number>-1</number>
+     </property>
      <property name="leftMargin">
       <number>12</number>
      </property>
@@ -224,32 +227,6 @@
         <property name="bottomMargin">
          <number>0</number>
         </property>
-        <item row="3" column="1">
-         <widget class="QLabel" name="stepLabel">
-          <property name="toolTip">
-           <string>Дискретность снятия точек, градусы</string>
-          </property>
-          <property name="text">
-           <string>Дискретность, град:</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="1" colspan="3">
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>100</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
         <item row="4" column="1">
          <widget class="QLabel" name="roationAngleLabel">
           <property name="toolTip">
@@ -279,29 +256,6 @@
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="2">
-         <widget class="QLineEdit" name="toleranceXLineEdit">
-          <property name="inputMethodHints">
-           <set>Qt::ImhPreferNumbers</set>
-          </property>
-          <property name="text">
-           <string>1</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
-         <widget class="QLabel" name="toleranceXLabel">
-          <property name="toolTip">
-           <string>Допустимое отклонение точек одного среза по оси X</string>
-          </property>
-          <property name="text">
-           <string>Допустимое отклонение по X, мм:</string>
           </property>
          </widget>
         </item>
@@ -338,24 +292,159 @@
           </property>
          </widget>
         </item>
-        <item row="7" column="1">
-         <widget class="QCheckBox" name="rotationFixCheckBox">
+        <item row="3" column="1">
+         <widget class="QLabel" name="stepLabel">
           <property name="toolTip">
-           <string>Программный доворот каждого среза на удвоенную величину дискретности снятия точек</string>
+           <string>Дискретность снятия точек, градусы</string>
           </property>
           <property name="text">
-           <string>Компенсация поворота</string>
+           <string>Дискретность, град:</string>
           </property>
-         </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="QCheckBox" name="spiralScanCheckBox">
-          <property name="text">
-           <string>Сканирование по спирали</string>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
        </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTabWidget" name="scanTypeTabWidget">
+       <property name="tabPosition">
+        <enum>QTabWidget::North</enum>
+       </property>
+       <property name="tabShape">
+        <enum>QTabWidget::Rounded</enum>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <property name="elideMode">
+        <enum>Qt::ElideRight</enum>
+       </property>
+       <property name="usesScrollButtons">
+        <bool>false</bool>
+       </property>
+       <property name="documentMode">
+        <bool>false</bool>
+       </property>
+       <property name="tabBarAutoHide">
+        <bool>false</bool>
+       </property>
+       <widget class="QWidget" name="spiralScanTab">
+        <attribute name="title">
+         <string>Спираль</string>
+        </attribute>
+        <layout class="QGridLayout" name="gridLayout_7">
+         <property name="leftMargin">
+          <number>5</number>
+         </property>
+         <property name="topMargin">
+          <number>5</number>
+         </property>
+         <property name="rightMargin">
+          <number>5</number>
+         </property>
+         <property name="bottomMargin">
+          <number>5</number>
+         </property>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="spiralCorrectionAngleLineEdit">
+           <property name="text">
+            <string>0</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Угол поворота витка, град</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0" colspan="2">
+          <spacer name="verticalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="sliceScanTab">
+        <attribute name="title">
+         <string>Слои</string>
+        </attribute>
+        <layout class="QGridLayout" name="gridLayout_6">
+         <property name="leftMargin">
+          <number>5</number>
+         </property>
+         <property name="topMargin">
+          <number>5</number>
+         </property>
+         <property name="rightMargin">
+          <number>5</number>
+         </property>
+         <property name="bottomMargin">
+          <number>5</number>
+         </property>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="rotationFixCheckBox">
+           <property name="toolTip">
+            <string>Программный доворот каждого среза на удвоенную величину дискретности снятия точек</string>
+           </property>
+           <property name="text">
+            <string>Компенсация поворота</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="toleranceXLineEdit">
+           <property name="inputMethodHints">
+            <set>Qt::ImhPreferNumbers</set>
+           </property>
+           <property name="text">
+            <string>1</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="toleranceXLabel">
+           <property name="toolTip">
+            <string>Допустимое отклонение точек одного среза по оси X</string>
+           </property>
+           <property name="text">
+            <string>Допустимое отклонение по X, мм:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0" colspan="2">
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </item>
      <item>

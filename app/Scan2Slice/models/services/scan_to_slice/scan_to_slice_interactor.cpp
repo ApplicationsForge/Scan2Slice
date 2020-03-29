@@ -5,12 +5,12 @@ ScanToSliceInteractor::ScanToSliceInteractor()
 
 }
 
-void ScanToSliceInteractor::execute(Scan &s, double distanceToZero, double step, double generalRotationAngle, bool useMedianX, bool useMod360)
+void ScanToSliceInteractor::execute(Scan &s, double distanceToZero, double step, double generalRotationAngle, bool useMedianX, bool useMod360, double correctionAngle)
 {
     ScanToSliceInteractor::moveToZero(s, distanceToZero, useMedianX);
     QList<Point3D> points = s.points();
 
-    double k = 0;
+    double correctionAngleCurrentValue = 0;
     for(int i = 0; i < points.length(); i++)
     {
         double angle = generalRotationAngle + step * i;
@@ -20,12 +20,12 @@ void ScanToSliceInteractor::execute(Scan &s, double distanceToZero, double step,
             angle = int(angle) % 360 + mantis;
         }
 
-        qDebug() << angle << k;
-        rotate(points[i], angle + k);
+        //qDebug() << angle << correctionAngleCurrentValue;
+        rotate(points[i], angle + correctionAngleCurrentValue);
 
         if(int(angle) % 360 == 0)
         {
-            k += -0.25;
+            correctionAngleCurrentValue += correctionAngle;
         }
     }
     s.setPoints(points);

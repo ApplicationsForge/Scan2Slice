@@ -17,7 +17,8 @@ public:
                         double step = 1,
                         double generalRotationAngle = 0,
                         bool useMedianX = false,
-                        bool useMod360 = true);
+                        bool useMod360 = true,
+                        double correctionAngle = 0);
 
 private:
     static void moveToZero(Scan &s, double distanceToZero, bool useMedianX);
