@@ -90,7 +90,6 @@ void MainWindow::on_buildSlicePushButton_clicked()
         double step = ui->stepLineEdit->text().toDouble();
         double generalRotationAngle = ui->rotationAngleLineEdit->text().toDouble();
 
-        //if(ui->spiralScanCheckBox->isChecked())
         switch(ui->scanTypeTabWidget->currentIndex())
         {
         case 0:
