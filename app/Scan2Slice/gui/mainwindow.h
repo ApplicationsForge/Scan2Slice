@@ -10,6 +10,7 @@
 #include "models/services/save_points_to_file/save_points_to_file_interactor.h"
 #include "models/services/slice_scan/slice_scan_interactor.h"
 #include "models/services/spiral_scan/spiral_scan_interactor.h"
+#include "models/services/linear_scan/linear_scan_interactor.h"
 
 namespace Ui {
 class MainWindow;

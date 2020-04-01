@@ -105,6 +105,12 @@ void MainWindow::on_buildSlicePushButton_clicked()
             SliceScanInteractor::execute(distanceFromLaser, step, toleranceX, generalRotationAngle, useRotationFix);
             break;
         }
+        case 2:
+        {
+            double toleranceY = ui->toleranceYLineEdit->text().toDouble();
+            LinearScanInteractor::execute(distanceFromLaser, step, toleranceY, generalRotationAngle);
+            break;
+        }
         }
 
         this->updatePoints();
