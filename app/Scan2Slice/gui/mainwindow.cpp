@@ -107,8 +107,16 @@ void MainWindow::on_buildSlicePushButton_clicked()
         }
         case 2:
         {
-            double toleranceY = ui->toleranceYLineEdit->text().toDouble();
-            LinearScanInteractor::execute(distanceFromLaser, step, toleranceY, generalRotationAngle);
+            bool snakeSplit = ui->snakeScanCheckBox->isChecked();
+            if(snakeSplit)
+            {
+                LinearScanInteractor::execute(distanceFromLaser, step, generalRotationAngle);
+            }
+            else
+            {
+                double toleranceY = ui->toleranceYLineEdit->text().toDouble();
+                LinearScanInteractor::execute(distanceFromLaser, step, toleranceY, generalRotationAngle);
+            }
             break;
         }
         }
@@ -147,4 +155,11 @@ void MainWindow::on_reloadFilePushButton_clicked()
         ui->pointsTableWidget->clear();
         QMessageBox(QMessageBox::Critical, "Error", "Error").exec();
     }
+}
+
+void MainWindow::on_snakeScanCheckBox_clicked()
+{
+    bool state = ui->snakeScanCheckBox->isChecked();
+    ui->toleranceYLabel->setEnabled(!state);
+    ui->toleranceYLineEdit->setEnabled(!state);
 }

@@ -9,15 +9,25 @@ void LinearScanInteractor::execute(double distanceFromLaser, double step, double
 {
     Router &router = Router::getInstance();
     Scan s = LinearScanInteractor::joinScans(router.getRepository().scans());
-    //QList<Scan> scansLinesAlongX = LinearScanInteractor::splitByAxisX(s, toleranceY);
-    QList<Scan> scansLinesAlongX = LinearScanInteractor::snakeSplit(s);
+    QList<Scan> scansLinesAlongX = LinearScanInteractor::splitByAxisX(s, toleranceY);
+    router.getRepository().setScans(LinearScanInteractor::executeSafe(scansLinesAlongX, distanceFromLaser, step, generalRotationAngle));
+}
 
+void LinearScanInteractor::execute(double distanceFromLaser, double step, double generalRotationAngle)
+{
+    Router &router = Router::getInstance();
+    Scan s = LinearScanInteractor::joinScans(router.getRepository().scans());
+    QList<Scan> scansLinesAlongX = LinearScanInteractor::snakeSplit(s);
+    router.getRepository().setScans(LinearScanInteractor::executeSafe(scansLinesAlongX, distanceFromLaser, step, generalRotationAngle));
+}
+
+QList<Scan> LinearScanInteractor::executeSafe(const QList<Scan> &scans, double distanceFromLaser, double step, double generalRotationAngle)
+{
+    QList<Scan> result = {};
     double currentRotationAngle = generalRotationAngle;
-    for(auto& scan : scansLinesAlongX)
+    for(auto scan : scans)
     {
         Scan::moveToZero(scan, distanceFromLaser, false);
-        qDebug() << "rotate" << scan.points().length() << "points" << currentRotationAngle;
-
         QList<Point3D> scanPoints = scan.points();
         for(auto& point : scanPoints)
         {
@@ -26,9 +36,11 @@ void LinearScanInteractor::execute(double distanceFromLaser, double step, double
         scan.setPoints(scanPoints);
         currentRotationAngle += step;
 
-        if(currentRotationAngle > 360) break;
+        result.append(scan);
+        if(currentRotationAngle > 360 + generalRotationAngle) break;
     }
-    router.getRepository().setScans(scansLinesAlongX);}
+    return result;
+}
 
 Scan LinearScanInteractor::joinScans(const QList<Scan> &scans)
 {
@@ -58,8 +70,6 @@ QList<Scan> LinearScanInteractor::splitByAxisX(const Scan &s, double precision)
         tmp.append(points[i]);
     }
 
-    qDebug() << "total" << result.length();
-
     return result;
 }
 
@@ -81,8 +91,6 @@ QList<Scan> LinearScanInteractor::snakeSplit(const Scan &s)
         }
         tmp.append(points[i]);
     }
-
-    qDebug() << "total" << result.length();
 
     return result;
 }
