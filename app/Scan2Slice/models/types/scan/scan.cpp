@@ -37,3 +37,38 @@ double Scan::medianX(const QList<Point3D> points)
     value = value / points.length();
     return value;
 }
+
+void Scan::moveToZero(Scan &s, double distanceToZero, bool useMedianX)
+{
+    QList<Point3D> points = s.points();
+    int pointsCount = points.length();
+    double medianX = Scan::medianX(points);
+    for(int i = 0; i < pointsCount; i++)
+    {
+        points[i].setZ(points[i].z() + distanceToZero);
+        points[i].setY(0.0);
+        if(useMedianX) points[i].setX(medianX);
+    }
+    s.setPoints(points);
+}
+
+void Scan::rotatePoint(Point3D &point, double i)
+{
+    // перевод градусов в радианы
+    double angle = i * M_PI / 180;
+
+    double cosAngle = cos(angle);
+    double sinAngle = sin(angle);
+
+    double y = point.y();
+    double z = point.z();
+
+    double y_ = 0.0;
+    double z_ = 0.0;
+
+    y_ = y * cosAngle - z * sinAngle;
+    z_ = y * sinAngle + z * cosAngle;
+
+    point.setY(y_);
+    point.setZ(z_);
+}

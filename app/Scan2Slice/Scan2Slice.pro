@@ -30,6 +30,7 @@ SOURCES += \
     models/repository/repository.cpp \
     models/router.cpp \
     models/services/gcodes_view/gcodes_view_interactor.cpp \
+    models/services/linear_scan/linear_scan_interactor.cpp \
     models/services/read_points_from_file/read_points_from_file_interactor.cpp \
     models/services/save_points_to_file/save_points_to_file_interactor.cpp \
     models/services/scan_to_slice/scan_to_slice_interactor.cpp \
@@ -45,6 +46,7 @@ HEADERS += \
     models/repository/repository.h \
     models/router.h \
     models/services/gcodes_view/gcodes_view_interactor.h \
+    models/services/linear_scan/linear_scan_interactor.h \
     models/services/read_points_from_file/read_points_from_file_interactor.h \
     models/services/save_points_to_file/save_points_to_file_interactor.h \
     models/services/scan_to_slice/scan_to_slice_interactor.h \

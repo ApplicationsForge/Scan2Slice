@@ -18,6 +18,9 @@ public:
 
     static double medianX(const QList<Point3D> points);
 
+    static void moveToZero(Scan &s, double distanceToZero, bool useMedianX);
+    static void rotatePoint(Point3D &point, double i);
+
 private:
     QList<Point3D> m_points;
 };

@@ -19,10 +19,6 @@ public:
                         bool useMedianX = false,
                         bool useMod360 = true,
                         double correctionAngle = 0);
-
-private:
-    static void moveToZero(Scan &s, double distanceToZero, bool useMedianX);
-    static void rotate(Point3D &point, double i);
 };
 
 #endif // SCANTOSLICEINTERACTOR_H
