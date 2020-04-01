@@ -22,6 +22,8 @@ public:
 private:
     static Scan joinScans(const QList<Scan> &scans);
     static QList<Scan> splitByAxisX(const Scan &s, double precision);
+    static QList<Scan> snakeSplit(const Scan &s);
+
 };
 
 #endif // LINEARSCANINTERACTOR_H
