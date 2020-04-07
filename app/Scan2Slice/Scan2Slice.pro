@@ -43,6 +43,7 @@ SOURCES += \
 
 HEADERS += \
         gui/mainwindow.h \
+    libs/spline/src/spline.h \
     models/repository/repository.h \
     models/router.h \
     models/services/gcodes_view/gcodes_view_interactor.h \

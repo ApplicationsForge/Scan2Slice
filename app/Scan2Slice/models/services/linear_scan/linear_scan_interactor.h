@@ -4,6 +4,7 @@
 #include <QDebug>
 
 #include "models/router.h"
+#include "libs/spline/src/spline.h"
 
 class LinearScanInteractor
 {
