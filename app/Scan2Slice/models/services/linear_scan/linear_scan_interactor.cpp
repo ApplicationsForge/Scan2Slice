@@ -27,7 +27,8 @@ void LinearScanInteractor::sliceExecute(double distanceFromLaser, double step, d
     Scan s = LinearScanInteractor::joinScans(router.getRepository().scans());
     QList<Scan> scansLinesAlongX = LinearScanInteractor::snakeSplit(s);
     scansLinesAlongX = LinearScanInteractor::executeSafe(scansLinesAlongX, distanceFromLaser, step, generalRotationAngle);
-    router.getRepository().setScans(LinearScanInteractor::getSlices(scansLinesAlongX, lowerBound, upperBound, sliceStep));
+    QList<Scan> slices = LinearScanInteractor::getSlices(scansLinesAlongX, lowerBound, upperBound, sliceStep);
+    router.getRepository().setScans(slices);
 }
 
 QList<Scan> LinearScanInteractor::executeSafe(const QList<Scan> &scans, double distanceFromLaser, double step, double generalRotationAngle)
@@ -110,8 +111,7 @@ QList<Scan> LinearScanInteractor::getSlices(const QList<Scan> &scans, double low
     for(auto scan : scans)
     {
         QList<Point3D> scanPoints = scan.points();
-
-        // нужно отсортировать точки по возрастанию
+        scanPoints = Scan::removeDuplicatesAndSort(scanPoints, 0.001);
 
         std::vector<double> arguments = {};
         std::vector<double> results = {};
@@ -121,8 +121,6 @@ QList<Scan> LinearScanInteractor::getSlices(const QList<Scan> &scans, double low
             results.push_back(point.z());
         }
         double yLevel = Scan::medianY(scanPoints);
-
-        // нужно отфильтровать точки и резульаты на предмет их одинаковости
 
         tk::spline s;
         s.set_points(arguments, results);

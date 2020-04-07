@@ -50,6 +50,20 @@ double Scan::medianY(const QList<Point3D> points)
     return value;
 }
 
+QList<Point3D> Scan::removeDuplicatesAndSort(QList<Point3D> points, double precision)
+{
+    QList<Point3D> result = {};
+    std::sort(points.begin(), points.end(), Point3D::cmpX);
+    for(int i = 1; i < points.length(); i++)
+    {
+        if(fabs(points[i-1].x() - points[i].x()) > precision)
+        {
+            result.append(points[i]);
+        }
+    }
+    return result;
+}
+
 void Scan::moveToZero(Scan &s, double distanceToZero, bool useMedianX)
 {
     QList<Point3D> points = s.points();
