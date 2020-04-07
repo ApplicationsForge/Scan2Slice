@@ -139,6 +139,10 @@ void MainWindow::on_buildSlicePushButton_clicked()
 void MainWindow::setBuildSliceWidgetsEnabled(bool enabled)
 {
     ui->buildSlicePushButton->setEnabled(enabled);
+
+#ifdef Q_OS_MACX
+    this->repaint();
+#endif
 }
 
 void MainWindow::on_saveToolButton_clicked()
