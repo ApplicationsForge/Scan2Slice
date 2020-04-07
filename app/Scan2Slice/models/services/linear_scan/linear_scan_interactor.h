@@ -26,7 +26,9 @@ public:
      * @param step - дискретность угла поворота в градусах
      * @param generalRotationAngle - угол на который нужно повернуть все точки
      */
-    static void execute(double distanceFromLaser, double step, double generalRotationAngle);
+    static void snakeExecute(double distanceFromLaser, double step, double generalRotationAngle);
+
+    static void sliceExecute(double distanceFromLaser, double step, double generalRotationAngle, double lowerBound, double upperBound, double sliceStep);
 
     /**
      * @brief Запускает сценарий без модификации данных
@@ -42,6 +44,9 @@ private:
     static Scan joinScans(const QList<Scan> &scans);
     static QList<Scan> splitByAxisX(const Scan &s, double precision);
     static QList<Scan> snakeSplit(const Scan &s);
+
+    static QList<Scan> getSlices(const QList<Scan> &scans, double lowerBound, double upperBound, double sliceStep);
+
 
 };
 

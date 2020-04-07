@@ -107,18 +107,24 @@ void MainWindow::on_buildSlicePushButton_clicked()
         }
         case 2:
         {
-            bool snakeSplit = ui->snakeScanCheckBox->isChecked();
-            if(snakeSplit)
+            double toleranceY = ui->toleranceYLineEdit->text().toDouble();
+            LinearScanInteractor::execute(distanceFromLaser, step, toleranceY, generalRotationAngle);
+            break;
+        }
+        case 3:
+            if(ui->getSlicesCheckBox->isChecked())
             {
-                LinearScanInteractor::execute(distanceFromLaser, step, generalRotationAngle);
+                double lowerBound = ui->lowerBoundLineEdit->text().toDouble();
+                double upperBound = ui->upperBoundLineEdit->text().toDouble();
+                double sliceStep = ui->sliceStepLineEdit->text().toDouble();
+                LinearScanInteractor::sliceExecute(distanceFromLaser, step, generalRotationAngle, lowerBound, upperBound, sliceStep);
             }
             else
             {
-                double toleranceY = ui->toleranceYLineEdit->text().toDouble();
-                LinearScanInteractor::execute(distanceFromLaser, step, toleranceY, generalRotationAngle);
+                LinearScanInteractor::snakeExecute(distanceFromLaser, step, generalRotationAngle);
+                break;
             }
-            break;
-        }
+
         }
 
         this->updatePoints();
@@ -157,9 +163,13 @@ void MainWindow::on_reloadFilePushButton_clicked()
     }
 }
 
-void MainWindow::on_snakeScanCheckBox_clicked()
+void MainWindow::on_getSlicesCheckBox_clicked()
 {
-    bool state = ui->snakeScanCheckBox->isChecked();
-    ui->toleranceYLabel->setEnabled(!state);
-    ui->toleranceYLineEdit->setEnabled(!state);
+    bool state = ui->getSlicesCheckBox->isChecked();
+    ui->lowerBoundLabel->setEnabled(state);
+    ui->lowerBoundLineEdit->setEnabled(state);
+    ui->upperBoundLabel->setEnabled(state);
+    ui->upperBoundLineEdit->setEnabled(state);
+    ui->sliceStepLabel->setEnabled(state);
+    ui->sliceStepLineEdit->setEnabled(state);
 }

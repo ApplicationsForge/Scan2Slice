@@ -13,12 +13,21 @@ void LinearScanInteractor::execute(double distanceFromLaser, double step, double
     router.getRepository().setScans(LinearScanInteractor::executeSafe(scansLinesAlongX, distanceFromLaser, step, generalRotationAngle));
 }
 
-void LinearScanInteractor::execute(double distanceFromLaser, double step, double generalRotationAngle)
+void LinearScanInteractor::snakeExecute(double distanceFromLaser, double step, double generalRotationAngle)
 {
     Router &router = Router::getInstance();
     Scan s = LinearScanInteractor::joinScans(router.getRepository().scans());
     QList<Scan> scansLinesAlongX = LinearScanInteractor::snakeSplit(s);
     router.getRepository().setScans(LinearScanInteractor::executeSafe(scansLinesAlongX, distanceFromLaser, step, generalRotationAngle));
+}
+
+void LinearScanInteractor::sliceExecute(double distanceFromLaser, double step, double generalRotationAngle, double lowerBound, double upperBound, double sliceStep)
+{
+    Router &router = Router::getInstance();
+    Scan s = LinearScanInteractor::joinScans(router.getRepository().scans());
+    QList<Scan> scansLinesAlongX = LinearScanInteractor::snakeSplit(s);
+    scansLinesAlongX = LinearScanInteractor::executeSafe(scansLinesAlongX, distanceFromLaser, step, generalRotationAngle);
+    router.getRepository().setScans(LinearScanInteractor::getSlices(scansLinesAlongX, lowerBound, upperBound, sliceStep));
 }
 
 QList<Scan> LinearScanInteractor::executeSafe(const QList<Scan> &scans, double distanceFromLaser, double step, double generalRotationAngle)
@@ -92,5 +101,47 @@ QList<Scan> LinearScanInteractor::snakeSplit(const Scan &s)
         tmp.append(points[i]);
     }
 
+    return result;
+}
+
+QList<Scan> LinearScanInteractor::getSlices(const QList<Scan> &scans, double lowerBound, double upperBound, double sliceStep)
+{
+    QList< QPair<double, tk::spline> > splines = {};
+    for(auto scan : scans)
+    {
+        QList<Point3D> scanPoints = scan.points();
+
+        // нужно отсортировать точки по возрастанию
+
+        std::vector<double> arguments = {};
+        std::vector<double> results = {};
+        for(auto point : scanPoints)
+        {
+            arguments.push_back(point.x());
+            results.push_back(point.z());
+        }
+        double yLevel = Scan::medianY(scanPoints);
+
+        // нужно отфильтровать точки и резульаты на предмет их одинаковости
+
+        tk::spline s;
+        s.set_points(arguments, results);
+        splines.append(QPair<double, tk::spline>(yLevel, s));
+    }
+
+    QList<Scan> result = {};
+    for(double i = lowerBound; i < upperBound; i += sliceStep)
+    {
+        QList<Point3D> slicePoints = {};
+        for(auto spline : splines)
+        {
+            double _x = i;
+            double _y = spline.first;
+            double _z = spline.second(i);
+            slicePoints.append(Point3D(_x, _y, _z));
+        }
+        Scan slice(slicePoints);
+        result.append(slice);
+    }
     return result;
 }

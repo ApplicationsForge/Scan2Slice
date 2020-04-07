@@ -38,6 +38,18 @@ double Scan::medianX(const QList<Point3D> points)
     return value;
 }
 
+double Scan::medianY(const QList<Point3D> points)
+{
+    double value = 0.0;
+    for(auto point : points)
+    {
+        value += point.y();
+    }
+
+    value = value / points.length();
+    return value;
+}
+
 void Scan::moveToZero(Scan &s, double distanceToZero, bool useMedianX)
 {
     QList<Point3D> points = s.points();

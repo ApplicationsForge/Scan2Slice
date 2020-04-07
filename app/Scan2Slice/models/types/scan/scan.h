@@ -17,6 +17,7 @@ public:
     void append(const QList<Point3D> &points);
 
     static double medianX(const QList<Point3D> points);
+    static double medianY(const QList<Point3D> points);
 
     static void moveToZero(Scan &s, double distanceToZero, bool useMedianX);
     static void rotatePoint(Point3D &point, double i);

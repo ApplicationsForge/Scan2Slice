@@ -36,7 +36,7 @@ private slots:
 
     void on_reloadFilePushButton_clicked();
 
-    void on_snakeScanCheckBox_clicked();
+    void on_getSlicesCheckBox_clicked();
 
 private:
     Ui::MainWindow *ui;
