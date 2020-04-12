@@ -26,24 +26,23 @@ void Scan::append(const QList<Point3D> &points)
     m_points.append(points);
 }
 
-double Scan::medianX(const QList<Point3D> points)
+double Scan::medianValue(const QList<Point3D> points, AXIS_NAME axis)
 {
     double value = 0.0;
     for(auto point : points)
     {
-        value += point.x();
-    }
-
-    value = value / points.length();
-    return value;
-}
-
-double Scan::medianY(const QList<Point3D> points)
-{
-    double value = 0.0;
-    for(auto point : points)
-    {
-        value += point.y();
+        switch (axis)
+        {
+        case AXIS_NAME::X:
+            value += point.x();
+            break;
+        case AXIS_NAME::Y:
+            value += point.y();
+            break;
+        case AXIS_NAME::Z:
+            value += point.z();
+            break;
+        }
     }
 
     value = value / points.length();
@@ -64,11 +63,48 @@ QList<Point3D> Scan::removeDuplicatesAndSort(QList<Point3D> points, double preci
     return result;
 }
 
+QList<Point3D> Scan::medianFilter(const QList<Point3D> &points, double maxOffset, AXIS_NAME axis)
+{
+    QList<Point3D> result = {points[0]};
+
+    //double medianValue = Scan::medianValue(points, axis);
+
+    for(int i = 1; i < points.length(); i++)
+    {
+        double currentValue = 0.0;
+        double previousValue = 0.0;
+
+        switch (axis)
+        {
+        case AXIS_NAME::X:
+            currentValue = points[i].x();
+            previousValue = points[i-1].x();
+            break;
+        case AXIS_NAME::Y:
+            currentValue = points[i].y();
+            previousValue = points[i-1].y();
+            break;
+        case AXIS_NAME::Z:
+            currentValue = points[i].z();
+            previousValue = points[i-1].z();
+            break;
+        }
+
+        if(fabs(currentValue - previousValue) <= maxOffset)
+        {
+            result.append(points[i]);
+        }
+    }
+
+    qDebug() << points.length() << result.length();
+    return result;
+}
+
 void Scan::moveToZero(Scan &s, double distanceToZero, bool useMedianX)
 {
     QList<Point3D> points = s.points();
     int pointsCount = points.length();
-    double medianX = Scan::medianX(points);
+    double medianX = Scan::medianValue(points, AXIS_NAME::X);
     for(int i = 0; i < pointsCount; i++)
     {
         points[i].setZ(points[i].z() + distanceToZero);

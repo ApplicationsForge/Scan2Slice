@@ -5,6 +5,7 @@
 
 #include "models/router.h"
 #include "libs/spline/src/spline.h"
+#include "models/types/linear_interpolation/linear_interpolated_polynomial.h"
 
 class LinearScanInteractor
 {
@@ -28,7 +29,7 @@ public:
      */
     static void snakeExecute(double distanceFromLaser, double step, double generalRotationAngle);
 
-    static void sliceExecute(double distanceFromLaser, double step, double generalRotationAngle, double lowerBound, double upperBound, double sliceStep);
+    static void sliceExecute(double distanceFromLaser, double step, double generalRotationAngle, double lowerBound, double upperBound, double sliceStep, double medianFilterOffset);
 
     /**
      * @brief Запускает сценарий без модификации данных
@@ -45,7 +46,8 @@ private:
     static QList<Scan> splitByAxisX(const Scan &s, double precision);
     static QList<Scan> snakeSplit(const Scan &s);
 
-    static QList<Scan> getSlices(const QList<Scan> &scans, double lowerBound, double upperBound, double sliceStep);
+    static QList<Scan> getSlicesAlt(const QList<Scan> &scans, double lowerBound, double upperBound, double sliceStep, double medianFilterOffset);
+    static QList<Scan> getSlices(const QList<Scan> &scans, double lowerBound, double upperBound, double sliceStep, double medianFilterOffset);
 
 
 };

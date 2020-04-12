@@ -517,29 +517,6 @@
          <property name="bottomMargin">
           <number>5</number>
          </property>
-         <item row="1" column="0">
-          <widget class="QLabel" name="lowerBoundLabel">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Начальная координата по X</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QLineEdit" name="sliceStepLineEdit">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>1</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
          <item row="1" column="1">
           <widget class="QLineEdit" name="lowerBoundLineEdit">
            <property name="enabled">
@@ -563,6 +540,42 @@
            </property>
           </widget>
          </item>
+         <item row="5" column="0" colspan="2">
+          <spacer name="verticalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>100</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="sliceStepLabel">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Шаг по X</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="sliceStepLineEdit">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>1</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
          <item row="2" column="0">
           <widget class="QLabel" name="upperBoundLabel">
            <property name="enabled">
@@ -570,6 +583,16 @@
            </property>
            <property name="text">
             <string>Конечная координата по X</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="lowerBoundLabel">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Начальная координата по X</string>
            </property>
           </widget>
          </item>
@@ -586,28 +609,31 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="sliceStepLabel">
+         <item row="4" column="0">
+          <widget class="QLabel" name="medianFilterLabel">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="toolTip">
+            <string>Максимальное отклоенение по оси X от среднего значения</string>
+           </property>
+           <property name="text">
+            <string>Медианный фильтр</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="medianFilterLineEdit">
            <property name="enabled">
             <bool>false</bool>
            </property>
            <property name="text">
-            <string>Шаг по X</string>
+            <string>1</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
            </property>
           </widget>
-         </item>
-         <item row="4" column="0" colspan="2">
-          <spacer name="verticalSpacer_3">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>100</height>
-            </size>
-           </property>
-          </spacer>
          </item>
         </layout>
        </widget>

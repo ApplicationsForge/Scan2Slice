@@ -117,7 +117,8 @@ void MainWindow::on_buildSlicePushButton_clicked()
                 double lowerBound = ui->lowerBoundLineEdit->text().toDouble();
                 double upperBound = ui->upperBoundLineEdit->text().toDouble();
                 double sliceStep = ui->sliceStepLineEdit->text().toDouble();
-                LinearScanInteractor::sliceExecute(distanceFromLaser, step, generalRotationAngle, lowerBound, upperBound, sliceStep);
+                double medianFilterValue = ui->medianFilterLineEdit->text().toDouble();
+                LinearScanInteractor::sliceExecute(distanceFromLaser, step, generalRotationAngle, lowerBound, upperBound, sliceStep, medianFilterValue);
             }
             else
             {
@@ -176,4 +177,6 @@ void MainWindow::on_getSlicesCheckBox_clicked()
     ui->upperBoundLineEdit->setEnabled(state);
     ui->sliceStepLabel->setEnabled(state);
     ui->sliceStepLineEdit->setEnabled(state);
+    ui->medianFilterLabel->setEnabled(state);
+    ui->medianFilterLineEdit->setEnabled(state);
 }

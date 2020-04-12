@@ -38,6 +38,8 @@ SOURCES += \
     models/services/spiral_scan/spiral_scan_interactor.cpp \
     models/services/split_to_scans/split_to_scans_interactor.cpp \
     models/settings_manager/settings_manager.cpp \
+    models/types/linear_interpolation/linear_equation.cpp \
+    models/types/linear_interpolation/linear_interpolated_polynomial.cpp \
     models/types/point_3d/point_3d.cpp \
     models/types/scan/scan.cpp
 
@@ -55,6 +57,8 @@ HEADERS += \
     models/services/spiral_scan/spiral_scan_interactor.h \
     models/services/split_to_scans/split_to_scans_interactor.h \
     models/settings_manager/settings_manager.h \
+    models/types/linear_interpolation/linear_equation.h \
+    models/types/linear_interpolation/linear_interpolated_polynomial.h \
     models/types/point_3d/point_3d.h \
     models/types/scan/scan.h
 

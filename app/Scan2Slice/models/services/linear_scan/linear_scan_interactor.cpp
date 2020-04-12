@@ -21,13 +21,13 @@ void LinearScanInteractor::snakeExecute(double distanceFromLaser, double step, d
     router.getRepository().setScans(LinearScanInteractor::executeSafe(scansLinesAlongX, distanceFromLaser, step, generalRotationAngle));
 }
 
-void LinearScanInteractor::sliceExecute(double distanceFromLaser, double step, double generalRotationAngle, double lowerBound, double upperBound, double sliceStep)
+void LinearScanInteractor::sliceExecute(double distanceFromLaser, double step, double generalRotationAngle, double lowerBound, double upperBound, double sliceStep, double medianFilterOffset)
 {
     Router &router = Router::getInstance();
     Scan s = LinearScanInteractor::joinScans(router.getRepository().scans());
     QList<Scan> scansLinesAlongX = LinearScanInteractor::snakeSplit(s);
     scansLinesAlongX = LinearScanInteractor::executeSafe(scansLinesAlongX, distanceFromLaser, step, generalRotationAngle);
-    QList<Scan> slices = LinearScanInteractor::getSlices(scansLinesAlongX, lowerBound, upperBound, sliceStep);
+    QList<Scan> slices = LinearScanInteractor::getSlices(scansLinesAlongX, lowerBound, upperBound, sliceStep, medianFilterOffset);
     router.getRepository().setScans(slices);
 }
 
@@ -105,13 +105,20 @@ QList<Scan> LinearScanInteractor::snakeSplit(const Scan &s)
     return result;
 }
 
-QList<Scan> LinearScanInteractor::getSlices(const QList<Scan> &scans, double lowerBound, double upperBound, double sliceStep)
+QList<Scan> LinearScanInteractor::getSlicesAlt(const QList<Scan> &scans, double lowerBound, double upperBound, double sliceStep, double medianFilterOffset)
 {
     QList< QPair<double, tk::spline> > splines = {};
     for(auto scan : scans)
     {
         QList<Point3D> scanPoints = scan.points();
         scanPoints = Scan::removeDuplicatesAndSort(scanPoints, 0.001);
+
+        if(medianFilterOffset > 0) scanPoints = Scan::medianFilter(scanPoints, medianFilterOffset, AXIS_NAME::Z);
+
+        if(scanPoints.length() <= 3) {
+            qDebug() << "too small count of points" << scanPoints.length();
+            continue;
+        }
 
         std::vector<double> arguments = {};
         std::vector<double> results = {};
@@ -120,9 +127,11 @@ QList<Scan> LinearScanInteractor::getSlices(const QList<Scan> &scans, double low
             arguments.push_back(point.x());
             results.push_back(point.z());
         }
-        double yLevel = Scan::medianY(scanPoints);
+        double yLevel = Scan::medianValue(scanPoints, AXIS_NAME::Y);
 
         tk::spline s;
+        s.set_boundary(tk::spline::second_deriv, 0.0,
+                           tk::spline::first_deriv, -2.0, false);
         s.set_points(arguments, results);
         splines.append(QPair<double, tk::spline>(yLevel, s));
     }
@@ -136,6 +145,44 @@ QList<Scan> LinearScanInteractor::getSlices(const QList<Scan> &scans, double low
             double _x = i;
             double _y = spline.first;
             double _z = spline.second(i);
+            slicePoints.append(Point3D(_x, _y, _z));
+        }
+        Scan slice(slicePoints);
+        result.append(slice);
+    }
+    return result;
+}
+
+QList<Scan> LinearScanInteractor::getSlices(const QList<Scan> &scans, double lowerBound, double upperBound, double sliceStep, double medianFilterOffset)
+{
+    QList< QPair<double, LinearInterpolatedPolynomial> > lines = {};
+    //for(auto scan : scans)
+    for(int i = 0; i < scans.length() / 2; i++)
+    {
+        QList<Point3D> scanPoints = scans[i].points();
+        scanPoints = Scan::removeDuplicatesAndSort(scanPoints, 0.001);
+
+        if(medianFilterOffset > 0) scanPoints = Scan::medianFilter(scanPoints, medianFilterOffset, AXIS_NAME::Z);
+
+        if(scanPoints.length() <= 3) {
+            qDebug() << "too small count of points" << scanPoints.length();
+            continue;
+        }
+
+        double yLevel = Scan::medianValue(scanPoints, AXIS_NAME::Y);
+        LinearInterpolatedPolynomial p(scanPoints);
+        lines.append(QPair<double, LinearInterpolatedPolynomial>(yLevel, p));
+    }
+
+    QList<Scan> result = {};
+    for(double i = lowerBound; i < upperBound; i += sliceStep)
+    {
+        QList<Point3D> slicePoints = {};
+        for(auto line : lines)
+        {
+            double _x = i;
+            double _y = line.first;
+            double _z = line.second.solve(i);
             slicePoints.append(Point3D(_x, _y, _z));
         }
         Scan slice(slicePoints);
