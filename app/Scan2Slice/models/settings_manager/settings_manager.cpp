@@ -116,7 +116,8 @@ void SettingsManager::generateDefaultSettings()
     settings->beginGroup("ExternalTools");
 
 #ifdef Q_OS_MACX
-    settings->setValue("GCodesViewer", "/Users/xtail/Projects/SML/sml-qt/gcodes_viewers/ElectronGCodesViewer/dist/mac/ElectronGCodesViewer.app/Contents/MacOS/ElectronGCodesViewer");
+    //settings->setValue("GCodesViewer", "/Users/xtail/Projects/SML/sml-qt/gcodes_viewers/ElectronGCodesViewer/dist/mac/ElectronGCodesViewer.app/Contents/MacOS/ElectronGCodesViewer");
+    settings->setValue("GCodesViewer", "/Users/xtail/Projects/SML/sml-qt/gcodes_viewers/CandleGCodesViewer/app/build-CandleGCodesViewer-Desktop_Qt_5_12_8_clang_64bit-Release/CandleGCodesViewer");
 #else
     settings->setValue("GCodesViewer", "CandleGCodesViewer");
 #endif
