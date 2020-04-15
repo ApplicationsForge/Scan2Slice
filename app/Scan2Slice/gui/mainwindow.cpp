@@ -86,6 +86,16 @@ void MainWindow::on_buildSlicePushButton_clicked()
 {
     try
     {
+        if(ui->splitToSlicesPage->isVisible())
+        {
+            double lowerBound = ui->lowerBoundLineEdit->text().toDouble();
+            double upperBound = ui->upperBoundLineEdit->text().toDouble();
+            double sliceStep = ui->sliceStepLineEdit->text().toDouble();
+            SplitToSlicesInteractor::execute(lowerBound, upperBound, sliceStep);
+            this->updatePoints();
+            return;
+        }
+
         double distanceFromLaser = ui->distanceLineEdit->text().toDouble();
         double step = ui->stepLineEdit->text().toDouble();
         double generalRotationAngle = ui->rotationAngleLineEdit->text().toDouble();
@@ -107,43 +117,24 @@ void MainWindow::on_buildSlicePushButton_clicked()
         }
         case 2:
         {
-            double toleranceY = ui->toleranceYLineEdit->text().toDouble();
-            LinearScanInteractor::execute(distanceFromLaser, step, toleranceY, generalRotationAngle);
-            break;
-        }
-        case 3:
-            if(ui->getSlicesCheckBox->isChecked())
-            {
-                double lowerBound = ui->lowerBoundLineEdit->text().toDouble();
-                double upperBound = ui->upperBoundLineEdit->text().toDouble();
-                double sliceStep = ui->sliceStepLineEdit->text().toDouble();
-                double medianFilterValue = ui->medianFilterLineEdit->text().toDouble();
-                LinearScanInteractor::sliceExecute(distanceFromLaser, step, generalRotationAngle, lowerBound, upperBound, sliceStep, medianFilterValue);
-            }
-            else
+            if(ui->snakeScanCheckBox->isChecked())
             {
                 LinearScanInteractor::snakeExecute(distanceFromLaser, step, generalRotationAngle);
                 break;
             }
 
+            double toleranceY = ui->toleranceYLineEdit->text().toDouble();
+            LinearScanInteractor::execute(distanceFromLaser, step, toleranceY, generalRotationAngle);
+            break;
+        }
         }
 
         this->updatePoints();
-        this->setBuildSliceWidgetsEnabled(false);
     }
     catch (...)
     {
         QMessageBox(QMessageBox::Critical, "Error", "Error").exec();
     }
-}
-
-void MainWindow::setBuildSliceWidgetsEnabled(bool enabled)
-{
-    ui->buildSlicePushButton->setEnabled(enabled);
-
-#ifdef Q_OS_MACX
-    this->repaint();
-#endif
 }
 
 void MainWindow::on_saveToolButton_clicked()
@@ -159,7 +150,6 @@ void MainWindow::on_reloadFilePushButton_clicked()
         Router &router = Router::getInstance();
         router.getRepository().setScans({ Scan(ReadPointsFromFileInteractor::execute(router.getRepository().openedFileName())) });
         this->updatePoints();
-        this->setBuildSliceWidgetsEnabled(true);
     }
     catch (...)
     {
@@ -168,15 +158,9 @@ void MainWindow::on_reloadFilePushButton_clicked()
     }
 }
 
-void MainWindow::on_getSlicesCheckBox_clicked()
+void MainWindow::on_snakeScanCheckBox_clicked()
 {
-    bool state = ui->getSlicesCheckBox->isChecked();
-    ui->lowerBoundLabel->setEnabled(state);
-    ui->lowerBoundLineEdit->setEnabled(state);
-    ui->upperBoundLabel->setEnabled(state);
-    ui->upperBoundLineEdit->setEnabled(state);
-    ui->sliceStepLabel->setEnabled(state);
-    ui->sliceStepLineEdit->setEnabled(state);
-    ui->medianFilterLabel->setEnabled(state);
-    ui->medianFilterLineEdit->setEnabled(state);
+    bool state = ui->snakeScanCheckBox->isChecked();
+    ui->toleranceYLabel->setEnabled(!state);
+    ui->toleranceYLineEdit->setEnabled(!state);
 }

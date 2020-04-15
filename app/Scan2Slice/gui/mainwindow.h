@@ -11,6 +11,7 @@
 #include "models/services/slice_scan/slice_scan_interactor.h"
 #include "models/services/spiral_scan/spiral_scan_interactor.h"
 #include "models/services/linear_scan/linear_scan_interactor.h"
+#include "models/services/split_to_slices/split_to_slices_interactor.h"
 
 namespace Ui {
 class MainWindow;
@@ -36,12 +37,10 @@ private slots:
 
     void on_reloadFilePushButton_clicked();
 
-    void on_getSlicesCheckBox_clicked();
+    void on_snakeScanCheckBox_clicked();
 
 private:
     Ui::MainWindow *ui;
-
-    void setBuildSliceWidgetsEnabled(bool enabled);
 };
 
 #endif // MAINWINDOW_H

@@ -28,6 +28,10 @@ public:
     static void moveToZero(Scan &s, double distanceToZero, bool useMedianX);
     static void rotatePoint(Point3D &point, double i);
 
+    static Scan joinScans(const QList<Scan> &scans);
+    static QList<Scan> snakeAlongXSplit(const Scan &s);
+    static QList<Scan> simpleAlongXSplit(const Scan &s, double precision);
+
 private:
     QList<Point3D> m_points;
 };

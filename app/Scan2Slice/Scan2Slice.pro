@@ -37,6 +37,7 @@ SOURCES += \
     models/services/slice_scan/slice_scan_interactor.cpp \
     models/services/spiral_scan/spiral_scan_interactor.cpp \
     models/services/split_to_scans/split_to_scans_interactor.cpp \
+    models/services/split_to_slices/split_to_slices_interactor.cpp \
     models/settings_manager/settings_manager.cpp \
     models/types/linear_interpolation/linear_equation.cpp \
     models/types/linear_interpolation/linear_interpolated_polynomial.cpp \
@@ -56,6 +57,7 @@ HEADERS += \
     models/services/slice_scan/slice_scan_interactor.h \
     models/services/spiral_scan/spiral_scan_interactor.h \
     models/services/split_to_scans/split_to_scans_interactor.h \
+    models/services/split_to_slices/split_to_slices_interactor.h \
     models/settings_manager/settings_manager.h \
     models/types/linear_interpolation/linear_equation.h \
     models/types/linear_interpolation/linear_interpolated_polynomial.h \
