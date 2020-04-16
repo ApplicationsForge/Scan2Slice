@@ -163,7 +163,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
@@ -207,7 +207,7 @@
       <number>5</number>
      </property>
      <property name="rightMargin">
-      <number>5</number>
+      <number>0</number>
      </property>
      <property name="bottomMargin">
       <number>10</number>
@@ -222,8 +222,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>336</width>
-          <height>418</height>
+          <width>378</width>
+          <height>387</height>
          </rect>
         </property>
         <attribute name="label">
@@ -231,7 +231,7 @@
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <property name="spacing">
-          <number>6</number>
+          <number>-1</number>
          </property>
          <property name="leftMargin">
           <number>5</number>
@@ -265,6 +265,9 @@
             </property>
             <property name="bottomMargin">
              <number>0</number>
+            </property>
+            <property name="verticalSpacing">
+             <number>-1</number>
             </property>
             <item row="4" column="1">
              <widget class="QLabel" name="roationAngleLabel">
@@ -555,8 +558,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>292</width>
-          <height>418</height>
+          <width>370</width>
+          <height>387</height>
          </rect>
         </property>
         <attribute name="label">
